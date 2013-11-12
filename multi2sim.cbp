@@ -1,0 +1,1960 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="multi2sim" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/multi2sim" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/multi2sim" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="AUTHORS" />
+		<Unit filename="COPYING" />
+		<Unit filename="ChangeLog" />
+		<Unit filename="INSTALL" />
+		<Unit filename="Makefile.am" />
+		<Unit filename="Makefile.in" />
+		<Unit filename="NEWS" />
+		<Unit filename="README" />
+		<Unit filename="TODO" />
+		<Unit filename="aclocal.m4" />
+		<Unit filename="config.guess" />
+		<Unit filename="config.sub" />
+		<Unit filename="configure" />
+		<Unit filename="configure.ac" />
+		<Unit filename="depcomp" />
+		<Unit filename="images/alu_engine.png" />
+		<Unit filename="images/back-double.png" />
+		<Unit filename="images/back-single.png" />
+		<Unit filename="images/back-triple.png" />
+		<Unit filename="images/cf_engine.png" />
+		<Unit filename="images/close-sel.png" />
+		<Unit filename="images/close.png" />
+		<Unit filename="images/engines.odg" />
+		<Unit filename="images/forward-double.png" />
+		<Unit filename="images/forward-single.png" />
+		<Unit filename="images/forward-triple.png" />
+		<Unit filename="images/go.png" />
+		<Unit filename="images/m2s-icon.png" />
+		<Unit filename="images/m2s-icon.xcf" />
+		<Unit filename="images/tex_engine.png" />
+		<Unit filename="install-sh" />
+		<Unit filename="ltmain.sh" />
+		<Unit filename="m2c/Makefile.am" />
+		<Unit filename="m2c/Makefile.in" />
+		<Unit filename="m2c/amd/Makefile.am" />
+		<Unit filename="m2c/amd/Makefile.in" />
+		<Unit filename="m2c/amd/amd-missing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/amd/amd.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/amd/amd.h" />
+		<Unit filename="m2c/cl2llvm/Makefile.am" />
+		<Unit filename="m2c/cl2llvm/Makefile.in" />
+		<Unit filename="m2c/cl2llvm/arg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/arg.h" />
+		<Unit filename="m2c/cl2llvm/array.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/array.h" />
+		<Unit filename="m2c/cl2llvm/built-in-funcs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/built-in-funcs.h" />
+		<Unit filename="m2c/cl2llvm/cl2llvm-missing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/cl2llvm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/cl2llvm.h" />
+		<Unit filename="m2c/cl2llvm/declarator-list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/declarator-list.h" />
+		<Unit filename="m2c/cl2llvm/enum-types.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/enum-types.h" />
+		<Unit filename="m2c/cl2llvm/for-blocks.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/for-blocks.h" />
+		<Unit filename="m2c/cl2llvm/format.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/format.h" />
+		<Unit filename="m2c/cl2llvm/function.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/function.h" />
+		<Unit filename="m2c/cl2llvm/init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/init.h" />
+		<Unit filename="m2c/cl2llvm/lex.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/lex.l" />
+		<Unit filename="m2c/cl2llvm/parser.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/parser.h" />
+		<Unit filename="m2c/cl2llvm/parser.y" />
+		<Unit filename="m2c/cl2llvm/symbol.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/symbol.h" />
+		<Unit filename="m2c/cl2llvm/type.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/type.h" />
+		<Unit filename="m2c/cl2llvm/val.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/val.h" />
+		<Unit filename="m2c/cl2llvm/vector-ops.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/vector-ops.h" />
+		<Unit filename="m2c/cl2llvm/while-blocks.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/cl2llvm/while-blocks.h" />
+		<Unit filename="m2c/common/Makefile.am" />
+		<Unit filename="m2c/common/Makefile.in" />
+		<Unit filename="m2c/common/basic-block.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/common/basic-block.h" />
+		<Unit filename="m2c/common/ctree.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/common/ctree.h" />
+		<Unit filename="m2c/common/node.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/common/node.h" />
+		<Unit filename="m2c/frm2bin/Makefile.am" />
+		<Unit filename="m2c/frm2bin/Makefile.in" />
+		<Unit filename="m2c/frm2bin/arg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/frm2bin/arg.h" />
+		<Unit filename="m2c/frm2bin/frm2bin-missing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/frm2bin/frm2bin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/frm2bin/frm2bin.h" />
+		<Unit filename="m2c/frm2bin/id.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/frm2bin/id.h" />
+		<Unit filename="m2c/frm2bin/inner-bin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/frm2bin/inner-bin.h" />
+		<Unit filename="m2c/frm2bin/inst-info.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/frm2bin/inst-info.h" />
+		<Unit filename="m2c/frm2bin/inst.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/frm2bin/inst.h" />
+		<Unit filename="m2c/frm2bin/lex.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/frm2bin/lex.l" />
+		<Unit filename="m2c/frm2bin/outer-bin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/frm2bin/outer-bin.h" />
+		<Unit filename="m2c/frm2bin/parser.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/frm2bin/parser.h" />
+		<Unit filename="m2c/frm2bin/parser.y" />
+		<Unit filename="m2c/frm2bin/symbol.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/frm2bin/symbol.h" />
+		<Unit filename="m2c/frm2bin/token.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/frm2bin/token.h" />
+		<Unit filename="m2c/gl/Makefile.am" />
+		<Unit filename="m2c/gl/Makefile.in" />
+		<Unit filename="m2c/gl/gl-missing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/gl/gl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/gl/gl.h" />
+		<Unit filename="m2c/llvm2si/Makefile.am" />
+		<Unit filename="m2c/llvm2si/Makefile.in" />
+		<Unit filename="m2c/llvm2si/basic-block.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/llvm2si/basic-block.h" />
+		<Unit filename="m2c/llvm2si/function.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/llvm2si/function.h" />
+		<Unit filename="m2c/llvm2si/llvm2si-missing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/llvm2si/llvm2si.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/llvm2si/llvm2si.h" />
+		<Unit filename="m2c/llvm2si/phi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/llvm2si/phi.h" />
+		<Unit filename="m2c/llvm2si/symbol-table.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/llvm2si/symbol-table.h" />
+		<Unit filename="m2c/llvm2si/symbol.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/llvm2si/symbol.h" />
+		<Unit filename="m2c/m2c.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/Makefile.am" />
+		<Unit filename="m2c/si2bin/Makefile.in" />
+		<Unit filename="m2c/si2bin/arg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/arg.h" />
+		<Unit filename="m2c/si2bin/data.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/data.h" />
+		<Unit filename="m2c/si2bin/id.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/id.h" />
+		<Unit filename="m2c/si2bin/inner-bin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/inner-bin.h" />
+		<Unit filename="m2c/si2bin/inst-info.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/inst-info.h" />
+		<Unit filename="m2c/si2bin/inst.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/inst.h" />
+		<Unit filename="m2c/si2bin/lex.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/lex.l" />
+		<Unit filename="m2c/si2bin/metadata.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/metadata.h" />
+		<Unit filename="m2c/si2bin/outer-bin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/outer-bin.h" />
+		<Unit filename="m2c/si2bin/parser.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/parser.h" />
+		<Unit filename="m2c/si2bin/parser.y" />
+		<Unit filename="m2c/si2bin/si2bin-missing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/si2bin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/si2bin.h" />
+		<Unit filename="m2c/si2bin/symbol.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/symbol.h" />
+		<Unit filename="m2c/si2bin/task.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/task.h" />
+		<Unit filename="m2c/si2bin/token.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="m2c/si2bin/token.h" />
+		<Unit filename="missing" />
+		<Unit filename="runtime/Makefile.am" />
+		<Unit filename="runtime/Makefile.in" />
+		<Unit filename="runtime/cuda/Makefile.am" />
+		<Unit filename="runtime/cuda/Makefile.in" />
+		<Unit filename="runtime/cuda/api-rt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/api.h" />
+		<Unit filename="runtime/cuda/context.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/context.h" />
+		<Unit filename="runtime/cuda/debug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/debug.h" />
+		<Unit filename="runtime/cuda/device.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/device.h" />
+		<Unit filename="runtime/cuda/elf-format.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/elf-format.h" />
+		<Unit filename="runtime/cuda/function-arg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/function-arg.h" />
+		<Unit filename="runtime/cuda/function.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/function.h" />
+		<Unit filename="runtime/cuda/list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/list.h" />
+		<Unit filename="runtime/cuda/memory.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/memory.h" />
+		<Unit filename="runtime/cuda/mhandle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/mhandle.h" />
+		<Unit filename="runtime/cuda/module.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/module.h" />
+		<Unit filename="runtime/cuda/stream.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/cuda/stream.h" />
+		<Unit filename="runtime/glew/Makefile.am" />
+		<Unit filename="runtime/glew/Makefile.in" />
+		<Unit filename="runtime/glew/api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glew/api.h" />
+		<Unit filename="runtime/glew/debug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glew/debug.h" />
+		<Unit filename="runtime/glew/mhandle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glew/mhandle.h" />
+		<Unit filename="runtime/glu/Makefile.am" />
+		<Unit filename="runtime/glu/Makefile.in" />
+		<Unit filename="runtime/glu/api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glu/api.h" />
+		<Unit filename="runtime/glu/debug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glu/debug.h" />
+		<Unit filename="runtime/glu/list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glu/list.h" />
+		<Unit filename="runtime/glu/mhandle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glu/mhandle.h" />
+		<Unit filename="runtime/glu/misc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glu/misc.h" />
+		<Unit filename="runtime/glu/string.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glu/string.h" />
+		<Unit filename="runtime/glut/Makefile.am" />
+		<Unit filename="runtime/glut/Makefile.in" />
+		<Unit filename="runtime/glut/api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glut/api.h" />
+		<Unit filename="runtime/glut/debug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glut/debug.h" />
+		<Unit filename="runtime/glut/glut.dat" />
+		<Unit filename="runtime/glut/list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glut/list.h" />
+		<Unit filename="runtime/glut/mhandle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glut/mhandle.h" />
+		<Unit filename="runtime/glut/window.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/glut/window.h" />
+		<Unit filename="runtime/include/CL/cl.h" />
+		<Unit filename="runtime/include/GL/gl.h" />
+		<Unit filename="runtime/include/GL/glew.h" />
+		<Unit filename="runtime/include/GL/glu.h" />
+		<Unit filename="runtime/include/GL/glut.h" />
+		<Unit filename="runtime/include/Makefile.am" />
+		<Unit filename="runtime/include/Makefile.in" />
+		<Unit filename="runtime/include/cuda.h" />
+		<Unit filename="runtime/include/cuda_runtime_api.h" />
+		<Unit filename="runtime/opencl-old/Makefile.am" />
+		<Unit filename="runtime/opencl-old/Makefile.in" />
+		<Unit filename="runtime/opencl-old/api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl-old/api.h" />
+		<Unit filename="runtime/opencl-old/command-queue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl-old/command-queue.h" />
+		<Unit filename="runtime/opencl-old/context.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl-old/context.h" />
+		<Unit filename="runtime/opencl-old/debug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl-old/debug.h" />
+		<Unit filename="runtime/opencl-old/device.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl-old/device.h" />
+		<Unit filename="runtime/opencl-old/event.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl-old/event.h" />
+		<Unit filename="runtime/opencl-old/kernel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl-old/kernel.h" />
+		<Unit filename="runtime/opencl-old/mem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl-old/mem.h" />
+		<Unit filename="runtime/opencl-old/mhandle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl-old/mhandle.h" />
+		<Unit filename="runtime/opencl-old/platform.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl-old/platform.h" />
+		<Unit filename="runtime/opencl-old/program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl-old/program.h" />
+		<Unit filename="runtime/opencl-old/sampler.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl-old/sampler.h" />
+		<Unit filename="runtime/opencl/Makefile.am" />
+		<Unit filename="runtime/opencl/Makefile.in" />
+		<Unit filename="runtime/opencl/command-queue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/command-queue.h" />
+		<Unit filename="runtime/opencl/command.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/command.h" />
+		<Unit filename="runtime/opencl/context.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/context.h" />
+		<Unit filename="runtime/opencl/debug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/debug.h" />
+		<Unit filename="runtime/opencl/device.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/device.h" />
+		<Unit filename="runtime/opencl/elf-format.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/elf-format.h" />
+		<Unit filename="runtime/opencl/even-partition-strategy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/even-partition-strategy.h" />
+		<Unit filename="runtime/opencl/event.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/event.h" />
+		<Unit filename="runtime/opencl/evg-device.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/evg-device.h" />
+		<Unit filename="runtime/opencl/evg-kernel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/evg-kernel.h" />
+		<Unit filename="runtime/opencl/evg-program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/evg-program.h" />
+		<Unit filename="runtime/opencl/kernel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/kernel.h" />
+		<Unit filename="runtime/opencl/list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/list.h" />
+		<Unit filename="runtime/opencl/mem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/mem.h" />
+		<Unit filename="runtime/opencl/mhandle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/mhandle.h" />
+		<Unit filename="runtime/opencl/misc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/misc.h" />
+		<Unit filename="runtime/opencl/object.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/object.h" />
+		<Unit filename="runtime/opencl/opencl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/opencl.h" />
+		<Unit filename="runtime/opencl/partition-strategy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/partition-strategy.h" />
+		<Unit filename="runtime/opencl/partition-util-time.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/partition-util-time.h" />
+		<Unit filename="runtime/opencl/partition-util.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/partition-util.h" />
+		<Unit filename="runtime/opencl/platform.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/platform.h" />
+		<Unit filename="runtime/opencl/program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/program.h" />
+		<Unit filename="runtime/opencl/relative-runtime-partition-strategy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/relative-runtime-partition-strategy.h" />
+		<Unit filename="runtime/opencl/sampler.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/sampler.h" />
+		<Unit filename="runtime/opencl/si-device.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/si-device.h" />
+		<Unit filename="runtime/opencl/si-kernel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/si-kernel.h" />
+		<Unit filename="runtime/opencl/si-program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/si-program.h" />
+		<Unit filename="runtime/opencl/string.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/string.h" />
+		<Unit filename="runtime/opencl/thread-list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/thread-list.h" />
+		<Unit filename="runtime/opencl/union-device.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/union-device.h" />
+		<Unit filename="runtime/opencl/union-kernel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/union-kernel.h" />
+		<Unit filename="runtime/opencl/union-program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/union-program.h" />
+		<Unit filename="runtime/opencl/x86-device-wi.s" />
+		<Unit filename="runtime/opencl/x86-device.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/x86-device.h" />
+		<Unit filename="runtime/opencl/x86-kernel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/x86-kernel.h" />
+		<Unit filename="runtime/opencl/x86-program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opencl/x86-program.h" />
+		<Unit filename="runtime/opengl/Makefile.am" />
+		<Unit filename="runtime/opengl/Makefile.in" />
+		<Unit filename="runtime/opengl/api.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/api.h" />
+		<Unit filename="runtime/opengl/buffer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/buffer.h" />
+		<Unit filename="runtime/opengl/context.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/context.h" />
+		<Unit filename="runtime/opengl/debug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/debug.h" />
+		<Unit filename="runtime/opengl/elf-format.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/elf-format.h" />
+		<Unit filename="runtime/opengl/fog-hint.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/fog-hint.h" />
+		<Unit filename="runtime/opengl/fragment.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/fragment.h" />
+		<Unit filename="runtime/opengl/framebuffer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/framebuffer.h" />
+		<Unit filename="runtime/opengl/light.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/light.h" />
+		<Unit filename="runtime/opengl/linked-list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/linked-list.h" />
+		<Unit filename="runtime/opengl/list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/list.h" />
+		<Unit filename="runtime/opengl/matrix.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/matrix.h" />
+		<Unit filename="runtime/opengl/mhandle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/mhandle.h" />
+		<Unit filename="runtime/opengl/misc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/misc.h" />
+		<Unit filename="runtime/opengl/opengl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/opengl.h" />
+		<Unit filename="runtime/opengl/pixel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/pixel.h" />
+		<Unit filename="runtime/opengl/program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/program.h" />
+		<Unit filename="runtime/opengl/rasterization.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/rasterization.h" />
+		<Unit filename="runtime/opengl/rectangle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/rectangle.h" />
+		<Unit filename="runtime/opengl/render-ctrl-query.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/render-ctrl-query.h" />
+		<Unit filename="runtime/opengl/shader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/shader.h" />
+		<Unit filename="runtime/opengl/special-func.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/special-func.h" />
+		<Unit filename="runtime/opengl/state.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/state.h" />
+		<Unit filename="runtime/opengl/string.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/string.h" />
+		<Unit filename="runtime/opengl/sync.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/sync.h" />
+		<Unit filename="runtime/opengl/texture.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/texture.h" />
+		<Unit filename="runtime/opengl/vertex-array.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/vertex-array.h" />
+		<Unit filename="runtime/opengl/vertex-spec.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/vertex-spec.h" />
+		<Unit filename="runtime/opengl/viewport.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="runtime/opengl/viewport.h" />
+		<Unit filename="samples/arm/test-args" />
+		<Unit filename="samples/arm/test-args.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="samples/arm/test-sort" />
+		<Unit filename="samples/arm/test-sort.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="samples/fermi/vectorAdd/vectorAdd" />
+		<Unit filename="samples/fermi/vectorAdd/vectorAdd.cubin" />
+		<Unit filename="samples/memory/example-1/README" />
+		<Unit filename="samples/memory/example-1/mem-config" />
+		<Unit filename="samples/memory/example-1/x86-config" />
+		<Unit filename="samples/memory/example-2/README" />
+		<Unit filename="samples/memory/example-2/mem-config" />
+		<Unit filename="samples/memory/example-2/net-config" />
+		<Unit filename="samples/memory/example-2/x86-config" />
+		<Unit filename="samples/memory/example-3/README" />
+		<Unit filename="samples/memory/example-3/mem-config" />
+		<Unit filename="samples/memory/example-3/net-config" />
+		<Unit filename="samples/memory/example-3/x86-config" />
+		<Unit filename="samples/memory/example-4/README" />
+		<Unit filename="samples/memory/example-4/evg-config" />
+		<Unit filename="samples/memory/example-4/mem-config" />
+		<Unit filename="samples/memory/example-4/x86-config" />
+		<Unit filename="samples/memory/example-5/README" />
+		<Unit filename="samples/memory/example-5/mem-config" />
+		<Unit filename="samples/memory/example-5/si-config" />
+		<Unit filename="samples/memory/example-5/x86-config" />
+		<Unit filename="samples/mips/test-args" />
+		<Unit filename="samples/mips/test-args.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="samples/mips/test-sort" />
+		<Unit filename="samples/mips/test-sort.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="samples/network/graphplot" />
+		<Unit filename="samples/network/mesh_9_route.txt" />
+		<Unit filename="samples/network/mesh_9_wo_r.txt" />
+		<Unit filename="samples/southern-islands/7770/mem-config" />
+		<Unit filename="samples/southern-islands/7770/si-config" />
+		<Unit filename="samples/southern-islands/7850/mem-config" />
+		<Unit filename="samples/southern-islands/7850/si-config" />
+		<Unit filename="samples/southern-islands/7870/mem-config" />
+		<Unit filename="samples/southern-islands/7870/si-config" />
+		<Unit filename="samples/southern-islands/7970/mem-config" />
+		<Unit filename="samples/southern-islands/7970/mem-config-unified-L1s" />
+		<Unit filename="samples/southern-islands/7970/si-config" />
+		<Unit filename="samples/x86/ctx-config-args-sort" />
+		<Unit filename="samples/x86/test-args" />
+		<Unit filename="samples/x86/test-args.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="samples/x86/test-sort" />
+		<Unit filename="samples/x86/test-sort.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="samples/x86/test-threads" />
+		<Unit filename="samples/x86/test-threads.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="samples/x86/x86-config-args-sort" />
+		<Unit filename="src/Makefile.am" />
+		<Unit filename="src/Makefile.in" />
+		<Unit filename="src/arch/Makefile.am" />
+		<Unit filename="src/arch/Makefile.in" />
+		<Unit filename="src/arch/arm/Makefile.am" />
+		<Unit filename="src/arch/arm/Makefile.in" />
+		<Unit filename="src/arch/arm/asm/Makefile.am" />
+		<Unit filename="src/arch/arm/asm/Makefile.in" />
+		<Unit filename="src/arch/arm/asm/asm-thumb.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/asm/asm-thumb.dat" />
+		<Unit filename="src/arch/arm/asm/asm-thumb.h" />
+		<Unit filename="src/arch/arm/asm/asm-thumb32.dat" />
+		<Unit filename="src/arch/arm/asm/asm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/asm/asm.dat" />
+		<Unit filename="src/arch/arm/asm/asm.h" />
+		<Unit filename="src/arch/arm/emu/Makefile.am" />
+		<Unit filename="src/arch/arm/emu/Makefile.in" />
+		<Unit filename="src/arch/arm/emu/context.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/emu/context.h" />
+		<Unit filename="src/arch/arm/emu/emu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/emu/emu.h" />
+		<Unit filename="src/arch/arm/emu/file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/emu/file.h" />
+		<Unit filename="src/arch/arm/emu/isa.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/emu/isa.h" />
+		<Unit filename="src/arch/arm/emu/machine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/emu/machine.h" />
+		<Unit filename="src/arch/arm/emu/machine_thumb16.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/emu/machine_thumb32.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/emu/regs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/emu/regs.h" />
+		<Unit filename="src/arch/arm/emu/signal.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/emu/signal.h" />
+		<Unit filename="src/arch/arm/emu/syscall.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/emu/syscall.dat" />
+		<Unit filename="src/arch/arm/emu/syscall.h" />
+		<Unit filename="src/arch/arm/timing/Makefile.am" />
+		<Unit filename="src/arch/arm/timing/Makefile.in" />
+		<Unit filename="src/arch/arm/timing/cpu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/arm/timing/cpu.h" />
+		<Unit filename="src/arch/common/Makefile.am" />
+		<Unit filename="src/arch/common/Makefile.in" />
+		<Unit filename="src/arch/common/arch.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/common/arch.h" />
+		<Unit filename="src/arch/common/asm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/common/asm.h" />
+		<Unit filename="src/arch/common/emu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/common/emu.h" />
+		<Unit filename="src/arch/common/runtime.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/common/runtime.h" />
+		<Unit filename="src/arch/common/timing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/common/timing.h" />
+		<Unit filename="src/arch/evergreen/Makefile.am" />
+		<Unit filename="src/arch/evergreen/Makefile.in" />
+		<Unit filename="src/arch/evergreen/asm/Makefile.am" />
+		<Unit filename="src/arch/evergreen/asm/Makefile.in" />
+		<Unit filename="src/arch/evergreen/asm/asm-dump.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/asm/asm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/asm/asm.dat" />
+		<Unit filename="src/arch/evergreen/asm/asm.h" />
+		<Unit filename="src/arch/evergreen/emu/Makefile.am" />
+		<Unit filename="src/arch/evergreen/emu/Makefile.in" />
+		<Unit filename="src/arch/evergreen/emu/emu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/emu/emu.h" />
+		<Unit filename="src/arch/evergreen/emu/isa.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/emu/isa.h" />
+		<Unit filename="src/arch/evergreen/emu/machine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/emu/machine.h" />
+		<Unit filename="src/arch/evergreen/emu/ndrange.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/emu/ndrange.h" />
+		<Unit filename="src/arch/evergreen/emu/opengl-bin-file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/emu/opengl-bin-file.h" />
+		<Unit filename="src/arch/evergreen/emu/wavefront.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/emu/wavefront.h" />
+		<Unit filename="src/arch/evergreen/emu/work-group.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/emu/work-group.h" />
+		<Unit filename="src/arch/evergreen/emu/work-item.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/emu/work-item.h" />
+		<Unit filename="src/arch/evergreen/timing/Makefile.am" />
+		<Unit filename="src/arch/evergreen/timing/Makefile.in" />
+		<Unit filename="src/arch/evergreen/timing/alu-engine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/timing/alu-engine.h" />
+		<Unit filename="src/arch/evergreen/timing/calc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/timing/calc.h" />
+		<Unit filename="src/arch/evergreen/timing/cf-engine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/timing/cf-engine.h" />
+		<Unit filename="src/arch/evergreen/timing/compute-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/timing/compute-unit.h" />
+		<Unit filename="src/arch/evergreen/timing/cycle-interval-report.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/timing/cycle-interval-report.h" />
+		<Unit filename="src/arch/evergreen/timing/faults.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/timing/faults.h" />
+		<Unit filename="src/arch/evergreen/timing/gpu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/timing/gpu.h" />
+		<Unit filename="src/arch/evergreen/timing/instruction-interval-report.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/timing/instruction-interval-report.h" />
+		<Unit filename="src/arch/evergreen/timing/mem-config.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/timing/mem-config.h" />
+		<Unit filename="src/arch/evergreen/timing/sched.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/timing/sched.h" />
+		<Unit filename="src/arch/evergreen/timing/tex-engine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/timing/tex-engine.h" />
+		<Unit filename="src/arch/evergreen/timing/uop.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/evergreen/timing/uop.h" />
+		<Unit filename="src/arch/fermi/Makefile.am" />
+		<Unit filename="src/arch/fermi/Makefile.in" />
+		<Unit filename="src/arch/fermi/asm/Makefile.am" />
+		<Unit filename="src/arch/fermi/asm/Makefile.in" />
+		<Unit filename="src/arch/fermi/asm/asm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/asm/asm.dat" />
+		<Unit filename="src/arch/fermi/asm/asm.h" />
+		<Unit filename="src/arch/fermi/emu/Makefile.am" />
+		<Unit filename="src/arch/fermi/emu/Makefile.in" />
+		<Unit filename="src/arch/fermi/emu/emu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/emu/emu.h" />
+		<Unit filename="src/arch/fermi/emu/grid.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/emu/grid.h" />
+		<Unit filename="src/arch/fermi/emu/isa.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/emu/isa.h" />
+		<Unit filename="src/arch/fermi/emu/machine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/emu/machine.h" />
+		<Unit filename="src/arch/fermi/emu/thread-block.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/emu/thread-block.h" />
+		<Unit filename="src/arch/fermi/emu/thread.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/emu/thread.h" />
+		<Unit filename="src/arch/fermi/emu/warp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/emu/warp.h" />
+		<Unit filename="src/arch/fermi/timing/Makefile.am" />
+		<Unit filename="src/arch/fermi/timing/Makefile.in" />
+		<Unit filename="src/arch/fermi/timing/branch-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/timing/branch-unit.h" />
+		<Unit filename="src/arch/fermi/timing/calc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/timing/calc.h" />
+		<Unit filename="src/arch/fermi/timing/cycle-interval-report.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/timing/cycle-interval-report.h" />
+		<Unit filename="src/arch/fermi/timing/gpu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/timing/gpu.h" />
+		<Unit filename="src/arch/fermi/timing/lds-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/timing/lds-unit.h" />
+		<Unit filename="src/arch/fermi/timing/mem-config.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/timing/mem-config.h" />
+		<Unit filename="src/arch/fermi/timing/simd-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/timing/simd-unit.h" />
+		<Unit filename="src/arch/fermi/timing/sm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/timing/sm.h" />
+		<Unit filename="src/arch/fermi/timing/uop.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/timing/uop.h" />
+		<Unit filename="src/arch/fermi/timing/vector-mem-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/timing/vector-mem-unit.h" />
+		<Unit filename="src/arch/fermi/timing/warp-inst-queue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/fermi/timing/warp-inst-queue.h" />
+		<Unit filename="src/arch/kepler/Makefile.am" />
+		<Unit filename="src/arch/kepler/Makefile.in" />
+		<Unit filename="src/arch/kepler/asm/Makefile.am" />
+		<Unit filename="src/arch/kepler/asm/Makefile.in" />
+		<Unit filename="src/arch/kepler/asm/asm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/kepler/asm/asm.dat" />
+		<Unit filename="src/arch/kepler/asm/asm.h" />
+		<Unit filename="src/arch/mips/Makefile.am" />
+		<Unit filename="src/arch/mips/Makefile.in" />
+		<Unit filename="src/arch/mips/asm/Makefile.am" />
+		<Unit filename="src/arch/mips/asm/Makefile.in" />
+		<Unit filename="src/arch/mips/asm/asm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/mips/asm/asm.dat" />
+		<Unit filename="src/arch/mips/asm/asm.h" />
+		<Unit filename="src/arch/mips/emu/Makefile.am" />
+		<Unit filename="src/arch/mips/emu/Makefile.in" />
+		<Unit filename="src/arch/mips/emu/context.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/mips/emu/context.h" />
+		<Unit filename="src/arch/mips/emu/emu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/mips/emu/emu.h" />
+		<Unit filename="src/arch/mips/emu/file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/mips/emu/file.h" />
+		<Unit filename="src/arch/mips/emu/isa.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/mips/emu/isa.h" />
+		<Unit filename="src/arch/mips/emu/machine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/mips/emu/machine.h" />
+		<Unit filename="src/arch/mips/emu/regs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/mips/emu/regs.h" />
+		<Unit filename="src/arch/mips/emu/syscall.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/mips/emu/syscall.dat" />
+		<Unit filename="src/arch/mips/emu/syscall.h" />
+		<Unit filename="src/arch/mips/timing/Makefile.am" />
+		<Unit filename="src/arch/mips/timing/Makefile.in" />
+		<Unit filename="src/arch/mips/timing/cpu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/mips/timing/cpu.h" />
+		<Unit filename="src/arch/southern-islands/Makefile.am" />
+		<Unit filename="src/arch/southern-islands/Makefile.in" />
+		<Unit filename="src/arch/southern-islands/asm/Makefile.am" />
+		<Unit filename="src/arch/southern-islands/asm/Makefile.in" />
+		<Unit filename="src/arch/southern-islands/asm/arg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/asm/arg.h" />
+		<Unit filename="src/arch/southern-islands/asm/asm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/asm/asm.dat" />
+		<Unit filename="src/arch/southern-islands/asm/asm.h" />
+		<Unit filename="src/arch/southern-islands/asm/bin-file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/asm/bin-file.h" />
+		<Unit filename="src/arch/southern-islands/asm/input.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/asm/input.h" />
+		<Unit filename="src/arch/southern-islands/emu/Makefile.am" />
+		<Unit filename="src/arch/southern-islands/emu/Makefile.in" />
+		<Unit filename="src/arch/southern-islands/emu/emu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/emu/emu.h" />
+		<Unit filename="src/arch/southern-islands/emu/isa.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/emu/isa.h" />
+		<Unit filename="src/arch/southern-islands/emu/machine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/emu/machine.h" />
+		<Unit filename="src/arch/southern-islands/emu/ndrange.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/emu/ndrange.h" />
+		<Unit filename="src/arch/southern-islands/emu/opengl-bin-file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/emu/opengl-bin-file.h" />
+		<Unit filename="src/arch/southern-islands/emu/wavefront.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/emu/wavefront.h" />
+		<Unit filename="src/arch/southern-islands/emu/work-group.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/emu/work-group.h" />
+		<Unit filename="src/arch/southern-islands/emu/work-item.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/emu/work-item.h" />
+		<Unit filename="src/arch/southern-islands/timing/Makefile.am" />
+		<Unit filename="src/arch/southern-islands/timing/Makefile.in" />
+		<Unit filename="src/arch/southern-islands/timing/branch-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/timing/branch-unit.h" />
+		<Unit filename="src/arch/southern-islands/timing/calc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/timing/calc.h" />
+		<Unit filename="src/arch/southern-islands/timing/compute-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/timing/compute-unit.h" />
+		<Unit filename="src/arch/southern-islands/timing/cycle-interval-report.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/timing/cycle-interval-report.h" />
+		<Unit filename="src/arch/southern-islands/timing/gpu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/timing/gpu.h" />
+		<Unit filename="src/arch/southern-islands/timing/lds-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/timing/lds-unit.h" />
+		<Unit filename="src/arch/southern-islands/timing/mem-config.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/timing/mem-config.h" />
+		<Unit filename="src/arch/southern-islands/timing/scalar-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/timing/scalar-unit.h" />
+		<Unit filename="src/arch/southern-islands/timing/simd-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/timing/simd-unit.h" />
+		<Unit filename="src/arch/southern-islands/timing/uop.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/timing/uop.h" />
+		<Unit filename="src/arch/southern-islands/timing/vector-mem-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/timing/vector-mem-unit.h" />
+		<Unit filename="src/arch/southern-islands/timing/wavefront-pool.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/southern-islands/timing/wavefront-pool.h" />
+		<Unit filename="src/arch/x86/Makefile.am" />
+		<Unit filename="src/arch/x86/Makefile.in" />
+		<Unit filename="src/arch/x86/asm/Makefile.am" />
+		<Unit filename="src/arch/x86/asm/Makefile.in" />
+		<Unit filename="src/arch/x86/asm/asm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/asm/asm.dat" />
+		<Unit filename="src/arch/x86/asm/asm.h" />
+		<Unit filename="src/arch/x86/asm/inst.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/asm/inst.h" />
+		<Unit filename="src/arch/x86/emu/Makefile.am" />
+		<Unit filename="src/arch/x86/emu/Makefile.in" />
+		<Unit filename="src/arch/x86/emu/checkpoint.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/checkpoint.h" />
+		<Unit filename="src/arch/x86/emu/context.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/context.h" />
+		<Unit filename="src/arch/x86/emu/emu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/emu.h" />
+		<Unit filename="src/arch/x86/emu/file-desc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/file-desc.h" />
+		<Unit filename="src/arch/x86/emu/isa.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/isa.h" />
+		<Unit filename="src/arch/x86/emu/loader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/loader.h" />
+		<Unit filename="src/arch/x86/emu/machine-ctrl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/machine-fp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/machine-rot.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/machine-sse.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/machine-sse2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/machine-sse3.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/machine-sse4.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/machine-std.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/machine-str.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/machine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/machine.h" />
+		<Unit filename="src/arch/x86/emu/regs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/regs.h" />
+		<Unit filename="src/arch/x86/emu/signal.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/signal.h" />
+		<Unit filename="src/arch/x86/emu/syscall.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/syscall.dat" />
+		<Unit filename="src/arch/x86/emu/syscall.h" />
+		<Unit filename="src/arch/x86/emu/uinst.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/emu/uinst.h" />
+		<Unit filename="src/arch/x86/timing/Makefile.am" />
+		<Unit filename="src/arch/x86/timing/Makefile.in" />
+		<Unit filename="src/arch/x86/timing/bpred.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/bpred.h" />
+		<Unit filename="src/arch/x86/timing/commit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/commit.h" />
+		<Unit filename="src/arch/x86/timing/core.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/core.h" />
+		<Unit filename="src/arch/x86/timing/cpu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/cpu.h" />
+		<Unit filename="src/arch/x86/timing/decode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/decode.h" />
+		<Unit filename="src/arch/x86/timing/dispatch.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/dispatch.h" />
+		<Unit filename="src/arch/x86/timing/event-queue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/event-queue.h" />
+		<Unit filename="src/arch/x86/timing/fetch-queue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/fetch-queue.h" />
+		<Unit filename="src/arch/x86/timing/fetch.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/fetch.h" />
+		<Unit filename="src/arch/x86/timing/fu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/fu.h" />
+		<Unit filename="src/arch/x86/timing/inst-queue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/inst-queue.h" />
+		<Unit filename="src/arch/x86/timing/issue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/issue.h" />
+		<Unit filename="src/arch/x86/timing/load-store-queue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/load-store-queue.h" />
+		<Unit filename="src/arch/x86/timing/mem-config.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/mem-config.h" />
+		<Unit filename="src/arch/x86/timing/recover.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/recover.h" />
+		<Unit filename="src/arch/x86/timing/reg-file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/reg-file.h" />
+		<Unit filename="src/arch/x86/timing/rob.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/rob.h" />
+		<Unit filename="src/arch/x86/timing/sched.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/sched.h" />
+		<Unit filename="src/arch/x86/timing/thread.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/thread.h" />
+		<Unit filename="src/arch/x86/timing/trace-cache.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/trace-cache.h" />
+		<Unit filename="src/arch/x86/timing/uop-queue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/uop-queue.h" />
+		<Unit filename="src/arch/x86/timing/uop.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/uop.h" />
+		<Unit filename="src/arch/x86/timing/writeback.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/arch/x86/timing/writeback.h" />
+		<Unit filename="src/dram/Makefile.am" />
+		<Unit filename="src/dram/Makefile.in" />
+		<Unit filename="src/dram/bank.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/dram/bank.h" />
+		<Unit filename="src/dram/command.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/dram/command.h" />
+		<Unit filename="src/dram/controller.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/dram/controller.h" />
+		<Unit filename="src/dram/dram-system.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/dram/dram-system.h" />
+		<Unit filename="src/dram/dram.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/dram/dram.h" />
+		<Unit filename="src/dram/file-accessor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/dram/file-accessor.h" />
+		<Unit filename="src/dram/rank.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/dram/rank.h" />
+		<Unit filename="src/dram/request.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/dram/request.h" />
+		<Unit filename="src/driver/Makefile.am" />
+		<Unit filename="src/driver/Makefile.in" />
+		<Unit filename="src/driver/cuda/Makefile.am" />
+		<Unit filename="src/driver/cuda/Makefile.in" />
+		<Unit filename="src/driver/cuda/cuda.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/cuda/cuda.dat" />
+		<Unit filename="src/driver/cuda/cuda.h" />
+		<Unit filename="src/driver/cuda/device.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/cuda/device.h" />
+		<Unit filename="src/driver/cuda/function-arg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/cuda/function-arg.h" />
+		<Unit filename="src/driver/cuda/function.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/cuda/function.h" />
+		<Unit filename="src/driver/cuda/memory.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/cuda/memory.h" />
+		<Unit filename="src/driver/cuda/module.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/cuda/module.h" />
+		<Unit filename="src/driver/glew/Makefile.am" />
+		<Unit filename="src/driver/glew/Makefile.in" />
+		<Unit filename="src/driver/glew/glew-missing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/glew/glew.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/glew/glew.dat" />
+		<Unit filename="src/driver/glew/glew.h" />
+		<Unit filename="src/driver/glu/Makefile.am" />
+		<Unit filename="src/driver/glu/Makefile.in" />
+		<Unit filename="src/driver/glu/glu-missing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/glu/glu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/glu/glu.dat" />
+		<Unit filename="src/driver/glu/glu.h" />
+		<Unit filename="src/driver/glut/Makefile.am" />
+		<Unit filename="src/driver/glut/Makefile.in" />
+		<Unit filename="src/driver/glut/frame-buffer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/glut/frame-buffer.h" />
+		<Unit filename="src/driver/glut/glut-missing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/glut/glut.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/glut/glut.dat" />
+		<Unit filename="src/driver/glut/glut.h" />
+		<Unit filename="src/driver/opencl-old/Makefile.am" />
+		<Unit filename="src/driver/opencl-old/Makefile.in" />
+		<Unit filename="src/driver/opencl-old/evergreen/Makefile.am" />
+		<Unit filename="src/driver/opencl-old/evergreen/Makefile.in" />
+		<Unit filename="src/driver/opencl-old/evergreen/bin-file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl-old/evergreen/bin-file.h" />
+		<Unit filename="src/driver/opencl-old/evergreen/command-queue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl-old/evergreen/command-queue.h" />
+		<Unit filename="src/driver/opencl-old/evergreen/context.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl-old/evergreen/context.h" />
+		<Unit filename="src/driver/opencl-old/evergreen/device.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl-old/evergreen/device.h" />
+		<Unit filename="src/driver/opencl-old/evergreen/event.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl-old/evergreen/event.h" />
+		<Unit filename="src/driver/opencl-old/evergreen/kernel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl-old/evergreen/kernel.h" />
+		<Unit filename="src/driver/opencl-old/evergreen/mem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl-old/evergreen/mem.h" />
+		<Unit filename="src/driver/opencl-old/evergreen/opencl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl-old/evergreen/opencl.dat" />
+		<Unit filename="src/driver/opencl-old/evergreen/opencl.h" />
+		<Unit filename="src/driver/opencl-old/evergreen/platform.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl-old/evergreen/platform.h" />
+		<Unit filename="src/driver/opencl-old/evergreen/program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl-old/evergreen/program.h" />
+		<Unit filename="src/driver/opencl-old/evergreen/repo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl-old/evergreen/repo.h" />
+		<Unit filename="src/driver/opencl-old/evergreen/sampler.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl-old/evergreen/sampler.h" />
+		<Unit filename="src/driver/opencl/Makefile.am" />
+		<Unit filename="src/driver/opencl/Makefile.in" />
+		<Unit filename="src/driver/opencl/opencl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl/opencl.dat" />
+		<Unit filename="src/driver/opencl/opencl.h" />
+		<Unit filename="src/driver/opencl/si-kernel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl/si-kernel.h" />
+		<Unit filename="src/driver/opencl/si-program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opencl/si-program.h" />
+		<Unit filename="src/driver/opengl/Makefile.am" />
+		<Unit filename="src/driver/opengl/Makefile.in" />
+		<Unit filename="src/driver/opengl/opengl-missing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opengl/opengl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opengl/opengl.dat" />
+		<Unit filename="src/driver/opengl/opengl.h" />
+		<Unit filename="src/driver/opengl/si-program.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opengl/si-program.h" />
+		<Unit filename="src/driver/opengl/si-shader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/driver/opengl/si-shader.h" />
+		<Unit filename="src/lib/Makefile.am" />
+		<Unit filename="src/lib/Makefile.in" />
+		<Unit filename="src/lib/esim/Makefile.am" />
+		<Unit filename="src/lib/esim/Makefile.in" />
+		<Unit filename="src/lib/esim/esim.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/esim/esim.h" />
+		<Unit filename="src/lib/esim/trace.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/esim/trace.h" />
+		<Unit filename="src/lib/mhandle/Makefile.am" />
+		<Unit filename="src/lib/mhandle/Makefile.in" />
+		<Unit filename="src/lib/mhandle/mhandle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/mhandle/mhandle.h" />
+		<Unit filename="src/lib/util/ChangeLog" />
+		<Unit filename="src/lib/util/Makefile.am" />
+		<Unit filename="src/lib/util/Makefile.in" />
+		<Unit filename="src/lib/util/bin-config.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/bin-config.h" />
+		<Unit filename="src/lib/util/bit-map.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/bit-map.h" />
+		<Unit filename="src/lib/util/buffer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/buffer.h" />
+		<Unit filename="src/lib/util/class.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/class.h" />
+		<Unit filename="src/lib/util/config.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/config.h" />
+		<Unit filename="src/lib/util/debug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/debug.h" />
+		<Unit filename="src/lib/util/elf-encode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/elf-encode.h" />
+		<Unit filename="src/lib/util/elf-format.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/elf-format.h" />
+		<Unit filename="src/lib/util/file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/file.h" />
+		<Unit filename="src/lib/util/hash-table.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/hash-table.h" />
+		<Unit filename="src/lib/util/heap.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/heap.h" />
+		<Unit filename="src/lib/util/linked-list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/linked-list.h" />
+		<Unit filename="src/lib/util/list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/list.h" />
+		<Unit filename="src/lib/util/matrix.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/matrix.h" />
+		<Unit filename="src/lib/util/misc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/misc.h" />
+		<Unit filename="src/lib/util/repos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/repos.h" />
+		<Unit filename="src/lib/util/string.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/string.h" />
+		<Unit filename="src/lib/util/timer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/util/timer.h" />
+		<Unit filename="src/m2s.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/Makefile.am" />
+		<Unit filename="src/mem-system/Makefile.in" />
+		<Unit filename="src/mem-system/cache.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/cache.h" />
+		<Unit filename="src/mem-system/command.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/command.h" />
+		<Unit filename="src/mem-system/config.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/config.h" />
+		<Unit filename="src/mem-system/directory.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/directory.h" />
+		<Unit filename="src/mem-system/local-mem-protocol.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/local-mem-protocol.h" />
+		<Unit filename="src/mem-system/mem-system.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/mem-system.h" />
+		<Unit filename="src/mem-system/memory.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/memory.h" />
+		<Unit filename="src/mem-system/mmu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/mmu.h" />
+		<Unit filename="src/mem-system/mod-stack.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/mod-stack.h" />
+		<Unit filename="src/mem-system/module.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/module.h" />
+		<Unit filename="src/mem-system/nmoesi-protocol.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/nmoesi-protocol.h" />
+		<Unit filename="src/mem-system/prefetch-history.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/prefetch-history.h" />
+		<Unit filename="src/mem-system/prefetcher.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/prefetcher.h" />
+		<Unit filename="src/mem-system/spec-mem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/mem-system/spec-mem.h" />
+		<Unit filename="src/network/Makefile.am" />
+		<Unit filename="src/network/Makefile.in" />
+		<Unit filename="src/network/buffer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/buffer.h" />
+		<Unit filename="src/network/bus.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/bus.h" />
+		<Unit filename="src/network/command.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/command.h" />
+		<Unit filename="src/network/link.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/link.h" />
+		<Unit filename="src/network/message.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/message.h" />
+		<Unit filename="src/network/net-system.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/net-system.h" />
+		<Unit filename="src/network/network.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/network.h" />
+		<Unit filename="src/network/node.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/node.h" />
+		<Unit filename="src/network/routing-table.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/routing-table.h" />
+		<Unit filename="src/network/visual.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/network/visual.h" />
+		<Unit filename="src/visual/Makefile.am" />
+		<Unit filename="src/visual/Makefile.in" />
+		<Unit filename="src/visual/common/Makefile.am" />
+		<Unit filename="src/visual/common/Makefile.in" />
+		<Unit filename="src/visual/common/cycle-bar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/common/cycle-bar.h" />
+		<Unit filename="src/visual/common/led.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/common/led.h" />
+		<Unit filename="src/visual/common/list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/common/list.h" />
+		<Unit filename="src/visual/common/popup.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/common/popup.h" />
+		<Unit filename="src/visual/common/state.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/common/state.h" />
+		<Unit filename="src/visual/common/trace.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/common/trace.h" />
+		<Unit filename="src/visual/common/visual-missing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/common/visual.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/common/visual.h" />
+		<Unit filename="src/visual/evergreen/Makefile.am" />
+		<Unit filename="src/visual/evergreen/Makefile.in" />
+		<Unit filename="src/visual/evergreen/compute-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/evergreen/compute-unit.h" />
+		<Unit filename="src/visual/evergreen/gpu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/evergreen/gpu.h" />
+		<Unit filename="src/visual/evergreen/inst.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/evergreen/inst.h" />
+		<Unit filename="src/visual/evergreen/panel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/evergreen/panel.h" />
+		<Unit filename="src/visual/evergreen/time-dia.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/evergreen/time-dia.h" />
+		<Unit filename="src/visual/evergreen/work-group.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/evergreen/work-group.h" />
+		<Unit filename="src/visual/memory/Makefile.am" />
+		<Unit filename="src/visual/memory/Makefile.in" />
+		<Unit filename="src/visual/memory/mem-system.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/memory/mem-system.h" />
+		<Unit filename="src/visual/memory/mod-access.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/memory/mod-access.h" />
+		<Unit filename="src/visual/memory/mod-widget.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/memory/mod-widget.h" />
+		<Unit filename="src/visual/memory/mod.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/memory/mod.h" />
+		<Unit filename="src/visual/memory/net.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/memory/net.h" />
+		<Unit filename="src/visual/memory/panel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/memory/panel.h" />
+		<Unit filename="src/visual/southern-islands/Makefile.am" />
+		<Unit filename="src/visual/southern-islands/Makefile.in" />
+		<Unit filename="src/visual/southern-islands/compute-unit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/southern-islands/compute-unit.h" />
+		<Unit filename="src/visual/southern-islands/gpu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/southern-islands/gpu.h" />
+		<Unit filename="src/visual/southern-islands/inst.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/southern-islands/inst.h" />
+		<Unit filename="src/visual/southern-islands/panel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/southern-islands/panel.h" />
+		<Unit filename="src/visual/southern-islands/time-dia.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/southern-islands/time-dia.h" />
+		<Unit filename="src/visual/southern-islands/work-group.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/southern-islands/work-group.h" />
+		<Unit filename="src/visual/x86/Makefile.am" />
+		<Unit filename="src/visual/x86/Makefile.in" />
+		<Unit filename="src/visual/x86/context.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/x86/context.h" />
+		<Unit filename="src/visual/x86/core.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/x86/core.h" />
+		<Unit filename="src/visual/x86/cpu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/x86/cpu.h" />
+		<Unit filename="src/visual/x86/inst.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/x86/inst.h" />
+		<Unit filename="src/visual/x86/panel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/x86/panel.h" />
+		<Unit filename="src/visual/x86/time-dia.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/visual/x86/time-dia.h" />
+		<Unit filename="ylwrap" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

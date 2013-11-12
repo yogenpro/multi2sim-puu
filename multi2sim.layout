@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="src\mem-system\mem-system.c" open="1" top="1" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="18835" topLine="381" />
+		</Cursor>
+	</File>
+	<File name="src\m2s.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="64170" topLine="2050" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\nmoesi-protocol.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4159" topLine="78" />
+		</Cursor>
+	</File>
+	<File name="m2c\amd\amd-missing.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1430" topLine="45" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\mmu.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1009" topLine="13" />
+		</Cursor>
+	</File>
+	<File name="m2c\m2c.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="550" topLine="454" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\directory.c" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4573" topLine="163" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\mmu.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1119" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\lib\util\config.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7226" topLine="309" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\directory.h" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2298" topLine="45" />
+		</Cursor>
+	</File>
+	<File name="src\lib\esim\trace.c" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3385" topLine="133" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\cache.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6626" topLine="246" />
+		</Cursor>
+	</File>
+	<File name="src\network\net-system.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="14673" topLine="491" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\local-mem-protocol.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1728" topLine="51" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\mod-stack.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2253" topLine="87" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\cache.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1379" topLine="38" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\module.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4891" topLine="194" />
+		</Cursor>
+	</File>
+	<File name="src\arch\x86\emu\emu.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3985" topLine="141" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\command.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7637" topLine="27" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\mem-system.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1787" topLine="58" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\module.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5767" topLine="224" />
+		</Cursor>
+	</File>
+	<File name="src\lib\esim\esim.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="14209" topLine="543" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\memory.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1057" topLine="204" />
+		</Cursor>
+	</File>
+	<File name="src\mem-system\nmoesi-protocol.c" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6975" topLine="274" />
+		</Cursor>
+	</File>
+</CodeBlocks_layout_file>
