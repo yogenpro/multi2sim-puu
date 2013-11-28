@@ -452,12 +452,14 @@ void mem_system_dump_report(void)
 		fprintf(f, "NoRetryNCWriteHits = %lld\n", mod->no_retry_nc_write_hits);
 		fprintf(f, "NoRetryNCWriteMisses = %lld\n", mod->no_retry_nc_writes
 			- mod->no_retry_nc_write_hits);
+        /* useless statistics
         fprintf(f, "NoncoherentBlocks = %d\n", mod->noncoherent_blocks);
         fprintf(f, "ModifiedBlocks = %d\n", mod->modified_blocks);
         fprintf(f, "OwnedBlocks = %d\n", mod->owned_blocks);
         fprintf(f, "ExclusiveBlocks = %d\n", mod->exclusive_blocks);
         fprintf(f, "SharedBlocks = %d\n", mod->shared_blocks);
         fprintf(f, "InvalidBlocks = %d\n", mod->invalid_blocks);
+        */
 		fprintf(f, "\n\n");
 	}
 
