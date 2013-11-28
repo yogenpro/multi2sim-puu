@@ -17,7 +17,7 @@ struct puu_buffer_t
 
 struct puu_t
 {
-    unsigned int counter_threashold;
+    unsigned int counter_threshold;
     unsigned int counter;
 
     struct puu_buffer_t *buffer;
