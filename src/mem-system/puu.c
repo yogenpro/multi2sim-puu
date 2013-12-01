@@ -9,6 +9,9 @@ struct puu_t *puu_create(void)
     /* Initialize */
     puu = (struct puu_t)xcalloc(1, sizeof(struct puu_t));
 
+    puu->counter = 0;
+    puu->counter_threshold = 20; // !!!MAGIC NUMBER HERE!!!
+
     return puu;
 };
 
@@ -24,17 +27,7 @@ long long puu_access(struct puu_t *puu, enum puu_access_kind_t access_kind,
 {
 	struct mod_stack_t *stack;
 	int event;
-
-	/* Create module stack with new ID */
-	mod_stack_id++;
-	stack = mod_stack_create(mod_stack_id,
-		mod, addr, ESIM_EV_NONE, NULL);
-
-	/* Initialize */
-	stack->witness_ptr = witness_ptr;
-	stack->event_queue = event_queue;
-	stack->event_queue_item = event_queue_item;
-	stack->client_info = client_info;
+	unsigned int addr_from_buf;
 
 	if (access_kind == puu_access_write)
     {
@@ -44,8 +37,25 @@ long long puu_access(struct puu_t *puu, enum puu_access_kind_t access_kind,
 
         if (puu->counter == puu->counter_threshold)
         {
-            // TODO: modify stack to agree with actual write data.
-            esim_execute_event(EV_MOD_LOCAL_MEM_STORE, stack);
+            // Issue
+            while (puu->counter--)
+            {
+                addr_from_buf = puu->buffer_head->entry->addr;
+                puu_buffer_del_head(puu);
+
+                /* Create module stack with new ID */
+                mod_stack_id++;
+                stack = mod_stack_create(mod_stack_id, mod, addr_from_buf,
+                    ESIM_EV_NONE, NULL);
+
+                /* Initialize */
+                stack->witness_ptr = witness_ptr;
+                stack->event_queue = event_queue;
+                stack->event_queue_item = event_queue_item;
+                stack->client_info = client_info;
+
+                esim_execute_event(EV_MOD_LOCAL_MEM_STORE, stack);
+            }
         }
     }
     else if (access_kind == puu_access_evict)
@@ -95,4 +105,21 @@ void puu_buffer_append_check(struct puu_t *puu, unsigned int addr)
         }
     }
     puu_buffer_append(puu, addr);
+}
+
+/* Delete eldest entry in buffer.
+ */
+void puu_buffer_del_head(struct puu_t *puu)
+{
+    struct buffer_head_entry *head_entry;
+
+    if (puu->buffer_tail == puu->buffer_head) //empty buffer
+    {
+        return;
+    }
+
+    head_entry = puu->buffer_head;
+    puu->buffer_head = puu->buffer_head->next;
+    puu->buffer_head->prev = NULL;
+    free(head_entry);
 }

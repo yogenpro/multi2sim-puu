@@ -41,6 +41,7 @@ long long puu_access(struct puu_t *puu, enum puu_access_kind_t access_kind,
 	unsigned int addr, int *witness_ptr, struct linked_list_t *event_queue,
 	void *event_queue_item, struct mod_client_info_t *client_info);
 
-void puu_buffer_append(struct puu_buffer_t *puu_buffer, unsigned int addr);
-
+void puu_buffer_append(struct puu_t *puu, unsigned int addr);
+void puu_buffer_append_check(struct puu_t *puu, unsigned int addr);
+void puu_buffer_del_head(struct puu_t *puu);
 #endif // MEM_SYSTEM_PUU_H
