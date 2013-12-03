@@ -44,4 +44,5 @@ long long puu_access(struct puu_t *puu, enum puu_access_kind_t access_kind,
 void puu_buffer_append(struct puu_t *puu, unsigned int addr);
 void puu_buffer_append_check(struct puu_t *puu, unsigned int addr);
 void puu_buffer_del_head(struct puu_t *puu);
+void puu_update(struct puu_t *puu)
 #endif // MEM_SYSTEM_PUU_H
