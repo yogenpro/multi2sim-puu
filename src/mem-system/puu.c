@@ -29,7 +29,7 @@ long long puu_access(struct puu_t *puu, enum puu_access_kind_t access_kind,
 	int event;
 	unsigned int addr_from_buf;
 
-	if (access_kind == puu_access_write)
+    if (access_kind == puu_access_write)
     {
         // TODO
         puu_buffer_append_check(puu, addr);
@@ -44,7 +44,7 @@ long long puu_access(struct puu_t *puu, enum puu_access_kind_t access_kind,
     {
         puu_update(puu);
     }
-    
+
     return stack->id;
 }
 
