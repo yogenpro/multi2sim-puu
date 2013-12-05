@@ -21,9 +21,10 @@ void puu_free(struct puu_t *puu)
     free(puu);
 }
 
-long long puu_access(struct puu_t *puu, enum puu_access_kind_t access_kind,
-	unsigned int addr, int *witness_ptr, struct linked_list_t *event_queue,
-	void *event_queue_item, struct mod_client_info_t *client_info)
+long long puu_access(struct puu_t *puu, struct mod_t *mod,
+    enum puu_access_kind_t access_kind, unsigned int addr, int *witness_ptr,
+    struct linked_list_t *event_queue, void *event_queue_item,
+    struct mod_client_info_t *client_info)
 {
 	struct mod_stack_t *stack;
 	int event;
@@ -31,21 +32,54 @@ long long puu_access(struct puu_t *puu, enum puu_access_kind_t access_kind,
 
     if (access_kind == puu_access_write)
     {
-        // TODO
         puu_buffer_append_check(puu, addr);
-        //puu->counter++; //shouldn't add counter if the address written to exists in the buffer -Zhu
 
         if (puu->counter == puu->counter_threshold)
         {
-            puu_update(puu);
+            puu_buffer_flush(puu, mod, witness_ptr, event_queue,
+                event_queue_item, client_info);
         }
     }
     else if (access_kind == puu_access_evict)
     {
-        puu_update(puu);
+        // TODO: check and eliminate duplicate entries in buffer.
+        puu_buffer_flush(puu, mod, witness_ptr, event_queue, event_queue_item,
+            client_info);
     }
 
     return stack->id;
+}
+
+/* Write all buffer entries into main memory.
+ */
+void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod, int *witness_ptr,
+    struct linked_list_t *event_queue, void *event_queue_item,
+    struct mod_client_info_t *client_info)
+{
+    struct mod_stack_t *stack;
+    unsigned int addr_from_buf;
+    struct mod_t *memory_mod;
+
+    memory_mod = puu_find_memory_mod(puu, mod);
+
+    // Issue writes to memroy
+    while (puu->counter--)
+    {
+        addr_from_buf = puu->buffer_head->entry->addr;
+        puu_buffer_del_head(puu);
+
+        // Create module stack for event
+        mod_stack_id++;
+        stack = mod_stack_create(mod_stack_id, memory_mod, addr_from_buf,
+            ESIM_EV_NONE, NULL);
+        stack->witness_ptr = witness_ptr;
+        stack->event_queue = event_queue;
+        // !!! HAVE TO FIGURE OUT WHAT IS EVENT_QUEUE FOR. POSSIBLY UNNECESSARY.
+        stack->event_queue_item = event_queue_item;
+        stack->client_info = client_info;
+
+        esim_execute_event(EV_MOD_LOCAL_MEM_STORE, stack);
+    }
 }
 
 /* Append new entry to the tail of buffer list.
@@ -65,6 +99,8 @@ void puu_buffer_append(struct puu_t *puu, unsigned int addr)
 
     puu->buffer_tail->next = new_buffer_node;
     puu->buffer_tail = puu->buffer_tail->next;
+
+    puu->counter++;
 }
 
 /* Check if entry with same target address already exists in buffer.
@@ -107,25 +143,20 @@ void puu_buffer_del_head(struct puu_t *puu)
     free(head_entry);
 }
 
-/* PUU updates/issues writes */
-void puu_update(struct puu_t *puu){
-    // Issue
-    while (puu->counter--)
+/* Returns the module in the lowest level of given module.
+ */
+struct mod_t *puu_find_memory_mod(struct puu_t *puu, struct mod_t *top_mod)
+{
+    unsigned int addr_from_buf;
+    struct mod_t *memory_mod;
+
+    memory_mod = top_mod;
+    addr_from_buf = puu->buffer_head->entry->addr; // Actually, address 0 would work as well.
+    while (1)
     {
-        addr_from_buf = puu->buffer_head->entry->addr;
-        puu_buffer_del_head(puu);
-
-        /* Create module stack with new ID */
-        mod_stack_id++;
-        stack = mod_stack_create(mod_stack_id, mod, addr_from_buf,
-            ESIM_EV_NONE, NULL);
-
-        /* Initialize */
-        stack->witness_ptr = witness_ptr;
-        stack->event_queue = event_queue;
-        stack->event_queue_item = event_queue_item;
-        stack->client_info = client_info;
-
-        esim_execute_event(EV_MOD_LOCAL_MEM_STORE, stack);
+        if(memory_mod->kind == mod_kind_main_memory) break;
+        memory_mod = mod_get_low_mod(memory_mod, addr_from_buf);
     }
-}
+
+    return memory_mod;
+};
