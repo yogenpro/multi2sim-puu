@@ -78,7 +78,7 @@ static int X86ThreadIssueSQ(X86Thread *self, int quantum)
 		       store->phy_addr, NULL, core->event_queue, store, client_info);
         /* Issue to PUU simultaneously */
         puu_access(self->puu, self->data_mod, puu_access_write,
-               store->phy_addr, NULL, core->event_queue, store, client_info)
+               store->phy_addr, NULL, core->event_queue, store, client_info);
 
 		/* The cache system will place the store at the head of the
 		 * event queue when it is ready. For now, mark "in_event_queue" to
