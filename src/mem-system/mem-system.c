@@ -32,6 +32,7 @@
 #include "mem-system.h"
 #include "module.h"
 #include "nmoesi-protocol.h"
+#include "puu.h"
 
 
 /*
@@ -64,6 +65,7 @@ struct mem_system_t *mem_system_create(void)
 	mem_system = xcalloc(1, sizeof(struct mem_system_t));
 	mem_system->net_list = list_create();
 	mem_system->mod_list = list_create();
+	mem_system->puu = puu_create();
 
 	/* Return */
 	return mem_system;
@@ -81,6 +83,9 @@ void mem_system_free(struct mem_system_t *mem_system)
 	while (list_count(mem_system->net_list))
 		net_free(list_pop(mem_system->net_list));
 	list_free(mem_system->net_list);
+
+	/* Free PUU */
+	puu_free(mem_system->puu);
 
 	/* Free memory system */
 	free(mem_system);

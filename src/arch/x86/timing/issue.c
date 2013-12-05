@@ -23,6 +23,7 @@
 #include <lib/util/linked-list.h>
 #include <mem-system/mmu.h>
 #include <mem-system/module.h>
+#include <mem-system/puu.h>
 
 #include "core.h"
 #include "cpu.h"
@@ -75,6 +76,9 @@ static int X86ThreadIssueSQ(X86Thread *self, int quantum)
 		/* Issue store */
 		mod_access(self->data_mod, mod_access_store,
 		       store->phy_addr, NULL, core->event_queue, store, client_info);
+        /* Issue to PUU simultaneously */
+        puu_access(self->puu, self->data_mod, puu_access_write,
+               store->phy_addr, NULL, core->event_queue, store, client_info)
 
 		/* The cache system will place the store at the head of the
 		 * event queue when it is ready. For now, mark "in_event_queue" to
@@ -82,7 +86,7 @@ static int X86ThreadIssueSQ(X86Thread *self, int quantum)
 		store->in_event_queue = 1;
 		store->issued = 1;
 		store->issue_when = asTiming(cpu)->cycle;
-	
+
 		/* Statistics */
 		core->num_issued_uinst_array[store->uinst->opcode]++;
 		core->lsq_reads++;
@@ -98,7 +102,7 @@ static int X86ThreadIssueSQ(X86Thread *self, int quantum)
 
 		/* One more instruction, update quantum. */
 		quantum--;
-		
+
 		/* MMU statistics */
 		if (*mmu_report_file_name)
 			mmu_access_page(store->phy_addr, mmu_access_write);
@@ -154,7 +158,7 @@ static int X86ThreadIssueLQ(X86Thread *self, int quant)
 		load->in_event_queue = 1;
 		load->issued = 1;
 		load->issue_when = asTiming(cpu)->cycle;
-		
+
 		/* Statistics */
 		core->num_issued_uinst_array[load->uinst->opcode]++;
 		core->lsq_reads++;
@@ -170,7 +174,7 @@ static int X86ThreadIssueLQ(X86Thread *self, int quant)
 
 		/* One more instruction issued, update quantum. */
 		quant--;
-		
+
 		/* MMU statistics */
 		if (*mmu_report_file_name)
 			mmu_access_page(load->phy_addr, mmu_access_read);
@@ -179,7 +183,7 @@ static int X86ThreadIssueLQ(X86Thread *self, int quant)
 		x86_trace("x86.inst id=%lld core=%d stg=\"i\"\n",
 			load->id_in_core, core->id);
 	}
-	
+
 	return quant;
 }
 
@@ -204,10 +208,10 @@ static int X86ThreadIssuePreQ(X86Thread *self, int quantum)
 			continue;
 		}
 
-		/* 
+		/*
 		 * Make sure its not been prefetched recently. This is just to avoid unnecessary
-		 * memory traffic. Even though the cache will realise a "hit" on redundant 
-		 * prefetches, its still helpful to avoid going to the memory (cache). 
+		 * memory traffic. Even though the cache will realise a "hit" on redundant
+		 * prefetches, its still helpful to avoid going to the memory (cache).
 		 */
 		if (prefetch_history_is_redundant(core->prefetch_history,
 							   self->data_mod, prefetch->phy_addr))
@@ -246,7 +250,7 @@ static int X86ThreadIssuePreQ(X86Thread *self, int quantum)
 		prefetch->in_event_queue = 1;
 		prefetch->issued = 1;
 		prefetch->issue_when = asTiming(cpu)->cycle;
-		
+
 		/* Statistics */
 		core->num_issued_uinst_array[prefetch->uinst->opcode]++;
 		core->lsq_reads++;
@@ -262,7 +266,7 @@ static int X86ThreadIssuePreQ(X86Thread *self, int quantum)
 
 		/* One more instruction issued, update quantum. */
 		quantum--;
-		
+
 		/* MMU statistics */
 		if (*mmu_report_file_name)
 			mmu_access_page(prefetch->phy_addr, mmu_access_read);
@@ -271,7 +275,7 @@ static int X86ThreadIssuePreQ(X86Thread *self, int quantum)
 		x86_trace("x86.inst id=%lld core=%d stg=\"i\"\n",
 			prefetch->id_in_core, core->id);
 	}
-	
+
 	return quantum;
 }
 
@@ -299,7 +303,7 @@ static int X86ThreadIssueIQ(X86Thread *self, int quant)
 			continue;
 		}
 		uop->ready = 1;  /* avoid next call to 'X86ThreadIsUopReady' */
-		
+
 		/* Run the instruction in its corresponding functional unit.
 		 * If the instruction does not require a functional unit, 'X86CoreReserveFunctionalUnit'
 		 * returns 1 cycle latency. If there is no functional unit available,
@@ -310,11 +314,11 @@ static int X86ThreadIssueIQ(X86Thread *self, int quant)
 			linked_list_next(iq);
 			continue;
 		}
-		
+
 		/* Instruction was issued to the corresponding fu.
 		 * Remove it from IQ */
 		X86ThreadRemoveFromIQ(self);
-		
+
 		/* Schedule inst in Event Queue */
 		assert(!uop->in_event_queue);
 		assert(lat > 0);
@@ -322,7 +326,7 @@ static int X86ThreadIssueIQ(X86Thread *self, int quant)
 		uop->issue_when = asTiming(cpu)->cycle;
 		uop->when = asTiming(cpu)->cycle + lat;
 		X86CoreInsertInEventQueue(core, uop);
-		
+
 		/* Statistics */
 		core->num_issued_uinst_array[uop->uinst->opcode]++;
 		core->iq_reads++;
@@ -343,7 +347,7 @@ static int X86ThreadIssueIQ(X86Thread *self, int quant)
 		x86_trace("x86.inst id=%lld core=%d stg=\"i\"\n",
 			uop->id_in_core, core->id);
 	}
-	
+
 	return quant;
 }
 
@@ -374,7 +378,7 @@ static void X86CoreIssue(X86Core *self)
 
 	switch (x86_cpu_issue_kind)
 	{
-	
+
 	case x86_cpu_issue_kind_shared:
 	{
 		/* Issue LSQs */
@@ -398,10 +402,10 @@ static void X86CoreIssue(X86Core *self)
 			quantum = X86ThreadIssueIQ(thread, quantum);
 			skip--;
 		} while (skip && quantum);
-		
+
 		break;
 	}
-	
+
 	case x86_cpu_issue_kind_timeslice:
 	{
 		/* Issue LSQs */

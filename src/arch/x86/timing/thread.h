@@ -89,6 +89,7 @@ CLASS_BEGIN(X86Thread, Object)
 	/* Entries to the memory system */
 	struct mod_t *data_mod;  /* Entry for data */
 	struct mod_t *inst_mod;  /* Entry for instructions */
+	struct puu_t *puu;       /* Entry for persistent update unit */
 
 	/* Cycle in which last micro-instruction committed */
 	long long last_commit_cycle;
@@ -101,7 +102,7 @@ CLASS_BEGIN(X86Thread, Object)
 	long long num_squashed_uinst;
 	long long num_branch_uinst;
 	long long num_mispred_branch_uinst;
-	
+
 	/* Statistics for structures */
 	long long rob_occupancy;
 	long long rob_full;
