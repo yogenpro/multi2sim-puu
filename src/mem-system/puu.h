@@ -1,6 +1,8 @@
 #ifndef MEM_SYSTEM_PUU_H
 #define MEM_SYSTEM_PUU_H
 
+#include "module.h"
+
 /* Access type */
 enum puu_access_kind_t
 {
