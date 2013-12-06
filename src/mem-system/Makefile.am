@@ -41,6 +41,9 @@ libmemsystem_a_SOURCES = \
 	prefetch-history.c \
 	prefetch-history.h \
 	\
+	puu.c \
+	puu.h \
+	\
 	prefetcher.c \
 	prefetcher.h
 
