@@ -499,7 +499,6 @@ struct mod_t *mem_system_get_mod(char *mod_name)
 	return NULL;
 }
 
-
 struct net_t *mem_system_get_net(char *net_name)
 {
 	struct net_t *net;
@@ -518,3 +517,7 @@ struct net_t *mem_system_get_net(char *net_name)
 	return NULL;
 }
 
+struct puu_t *mem_system_get_puu()
+{
+    return mem_system->puu;
+}

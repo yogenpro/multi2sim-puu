@@ -210,7 +210,10 @@ void X86CpuMemConfigParseEntry(Timing *self, struct config_t *config, char *sect
 			"\tThe given module name must match a module declared in a section\n"
 			"\t[Module <name>] in the memory configuration file.\n",
 			file_name, section, inst_module_name);
-	
+
+    /* Assign PUU */
+    thread->puu = mem_system_get_puu();
+
 	/* Add modules to entry list */
 	linked_list_add(arch_x86->mem_entry_mod_list, thread->data_mod);
 	if (thread->data_mod != thread->inst_mod)
