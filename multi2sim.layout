@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="m2c/amd/amd-missing.c" open="1" top="0" tabpos="1">
+	<File name="m2c/amd/amd-missing.c" open="0" top="0" tabpos="1">
 		<Cursor position="804" topLine="0" />
 	</File>
 	<File name="runtime/cuda/mhandle.h" open="0" top="0" tabpos="0">
 		<Cursor position="1326" topLine="0" />
 	</File>
-	<File name="src/arch/x86/timing/issue.c" open="1" top="0" tabpos="2">
-		<Cursor position="2292" topLine="63" />
+	<File name="src/arch/x86/timing/issue.c" open="1" top="0" tabpos="1">
+		<Cursor position="2075" topLine="30" />
 	</File>
-	<File name="src/lib/esim/esim.c" open="0" top="0" tabpos="8">
-		<Cursor position="0" topLine="0" />
+	<File name="src/lib/esim/esim.c" open="1" top="0" tabpos="8">
+		<Cursor position="4107" topLine="250" />
+	</File>
+	<File name="src/lib/esim/esim.h" open="0" top="0" tabpos="0">
+		<Cursor position="5133" topLine="127" />
 	</File>
 	<File name="src/lib/esim/trace.c" open="0" top="0" tabpos="10">
 		<Cursor position="0" topLine="0" />
 	</File>
+	<File name="src/lib/mhandle/mhandle.h" open="0" top="0" tabpos="0">
+		<Cursor position="1343" topLine="21" />
+	</File>
 	<File name="src/lib/util/debug.c" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="222" />
+	</File>
+	<File name="src/lib/util/list.c" open="1" top="0" tabpos="6">
+		<Cursor position="2069" topLine="78" />
 	</File>
 	<File name="src/mem-system/cache.c" open="0" top="0" tabpos="1">
 		<Cursor position="8211" topLine="279" />
@@ -34,35 +43,38 @@
 	<File name="src/mem-system/directory.h" open="0" top="0" tabpos="15">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src/mem-system/local-mem-protocol.c" open="0" top="0" tabpos="3">
-		<Cursor position="0" topLine="0" />
+	<File name="src/mem-system/local-mem-protocol.c" open="1" top="0" tabpos="7">
+		<Cursor position="1090" topLine="19" />
 	</File>
-	<File name="src/mem-system/mem-system.c" open="0" top="0" tabpos="5">
-		<Cursor position="0" topLine="0" />
+	<File name="src/mem-system/local-mem-protocol.h" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="10" />
+	</File>
+	<File name="src/mem-system/mem-system.c" open="1" top="1" tabpos="5">
+		<Cursor position="1497" topLine="51" />
 	</File>
 	<File name="src/mem-system/mmu.c" open="0" top="0" tabpos="5">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src/mem-system/mod-stack.c" open="1" top="0" tabpos="7">
-		<Cursor position="1009" topLine="75" />
+	<File name="src/mem-system/mod-stack.c" open="0" top="0" tabpos="7">
+		<Cursor position="1009" topLine="154" />
 	</File>
 	<File name="src/mem-system/mod-stack.h" open="0" top="0" tabpos="12">
-		<Cursor position="0" topLine="0" />
+		<Cursor position="1402" topLine="42" />
 	</File>
-	<File name="src/mem-system/module.c" open="1" top="0" tabpos="6">
-		<Cursor position="2945" topLine="27" />
+	<File name="src/mem-system/module.c" open="0" top="0" tabpos="6">
+		<Cursor position="2048" topLine="60" />
 	</File>
-	<File name="src/mem-system/module.h" open="1" top="0" tabpos="3">
-		<Cursor position="1673" topLine="0" />
+	<File name="src/mem-system/module.h" open="1" top="0" tabpos="2">
+		<Cursor position="6338" topLine="0" />
 	</File>
 	<File name="src/mem-system/nmoesi-protocol.c" open="0" top="0" tabpos="6">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src/mem-system/puu.c" open="1" top="1" tabpos="4">
-		<Cursor position="167" topLine="0" />
+	<File name="src/mem-system/puu.c" open="1" top="0" tabpos="3">
+		<Cursor position="1320" topLine="0" />
 	</File>
-	<File name="src/mem-system/puu.h" open="1" top="0" tabpos="5">
-		<Cursor position="70" topLine="0" />
+	<File name="src/mem-system/puu.h" open="1" top="0" tabpos="4">
+		<Cursor position="483" topLine="10" />
 	</File>
 	<File name="src/mem-system/spec-mem.c" open="0" top="0" tabpos="7">
 		<Cursor position="0" topLine="0" />

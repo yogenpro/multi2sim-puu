@@ -1,6 +1,9 @@
+#include <lib/mhandle/mhandle.h>
+#include <lib/esim/esim.h>
 #include "memory.h"
 #include "puu.h"
 #include "mod-stack.h"
+#include "local-mem-protocol.h"
 
 
 struct puu_t *puu_create(void)
@@ -8,7 +11,9 @@ struct puu_t *puu_create(void)
     struct puu_t *puu;
 
     /* Initialize */
-    puu = (struct puu_t)xcalloc(1, sizeof(struct puu_t));
+    //puu = (struct puu_t)xcalloc(1,sizeof(struct puu_t));
+    // do not need to make conversion. Ref:	list = xcalloc(1, sizeof(struct list_t)); (src/lib/util/list.c line:99)
+    puu = xcalloc(1, sizeof(struct puu_t));
 
     puu->counter = 0;
     puu->counter_threshold = 20; // !!!MAGIC NUMBER HERE!!!
@@ -90,12 +95,12 @@ void puu_buffer_append(struct puu_t *puu, unsigned int addr)
     struct puu_buffer_entry_t *new_buffer_entry;
     struct puu_buffer_t *new_buffer_node;
 
-    new_buffer_entry = (struct puu_buffer_entry_t)xcalloc(1, sizeof(struct puu_buffer_entry_t));
+    new_buffer_entry = xcalloc(1, sizeof(struct puu_buffer_entry_t));
     new_buffer_entry->addr = addr;
 
-    new_buffer_node = (struct puu_buffer_t)xcalloc(1, sizeof(struct puu_buffer_t));
+    new_buffer_node = xcalloc(1, sizeof(struct puu_buffer_t));
     new_buffer_node->entry = new_buffer_entry;
-    new_buffer_node->prev = puu->buffer->tail;
+    new_buffer_node->prev = puu->buffer_tail;
     new_buffer_node->next = NULL;
 
     puu->buffer_tail->next = new_buffer_node;
@@ -131,14 +136,14 @@ void puu_buffer_append_check(struct puu_t *puu, unsigned int addr)
  */
 void puu_buffer_del_head(struct puu_t *puu)
 {
-    struct buffer_head_entry *head_entry;
+    struct puu_buffer_entry_t *head_entry;
 
     if (puu->buffer_tail == puu->buffer_head) //empty buffer
     {
         return;
     }
 
-    head_entry = puu->buffer_head;
+    head_entry = puu->buffer_head->entry;
     puu->buffer_head = puu->buffer_head->next;
     puu->buffer_head->prev = NULL;
     free(head_entry);

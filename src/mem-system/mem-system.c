@@ -65,6 +65,7 @@ struct mem_system_t *mem_system_create(void)
 	mem_system = xcalloc(1, sizeof(struct mem_system_t));
 	mem_system->net_list = list_create();
 	mem_system->mod_list = list_create();
+	printf("mem_system->puu = puu_create();\n");
 	mem_system->puu = puu_create();
 
 	/* Return */

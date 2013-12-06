@@ -20,6 +20,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="--x86-config x86-config --mem-config mem-config --x86-sim detailed --mem-report canneal-mem-report-10m --x86-max-cycles 10000000 m2s-parsec-2.1/canneal/canneal 16 10000 2000 m2s-parsec-2.1/canneal/200000.nets 32" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
