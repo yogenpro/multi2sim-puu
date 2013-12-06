@@ -17,6 +17,10 @@ struct puu_t *puu_create(void)
 
     puu->counter = 0;
     puu->counter_threshold = 20; // !!!MAGIC NUMBER HERE!!!
+    puu->buffer = NULL;
+    puu->buffer_head = NULL;
+    puu->buffer_tail = NULL;
+    puu->buffer_pivot = NULL;
 
     return puu;
 };
@@ -103,8 +107,15 @@ void puu_buffer_append(struct puu_t *puu, unsigned int addr)
     new_buffer_node->prev = puu->buffer_tail;
     new_buffer_node->next = NULL;
 
-    puu->buffer_tail->next = new_buffer_node;
-    puu->buffer_tail = puu->buffer_tail->next;
+    if (puu->buffer_tail != NULL)
+    {
+        puu->buffer_tail->next = new_buffer_node;
+        puu->buffer_tail = puu->buffer_tail->next;
+    }
+    else
+    {
+        puu->buffer_tail = new_buffer_node;
+    }
 
     puu->counter++;
 }
