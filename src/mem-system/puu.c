@@ -36,9 +36,9 @@ long long puu_access(struct puu_t *puu, struct mod_t *mod,
     struct linked_list_t *event_queue, void *event_queue_item,
     struct mod_client_info_t *client_info)
 {
-	struct mod_stack_t *stack;
-	int event;
-	unsigned int addr_from_buf;
+//	struct mod_stack_t *stack;
+//	int event;
+//	unsigned int addr_from_buf;
 
     if (access_kind == puu_access_write)
     {
