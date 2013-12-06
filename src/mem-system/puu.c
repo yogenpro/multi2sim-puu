@@ -57,7 +57,7 @@ long long puu_access(struct puu_t *puu, struct mod_t *mod,
             client_info);
     }
 
-    return stack->id;
+    return 0;
 }
 
 /* Write all buffer entries into main memory.
@@ -112,9 +112,10 @@ void puu_buffer_append(struct puu_t *puu, unsigned int addr)
         puu->buffer_tail->next = new_buffer_node;
         puu->buffer_tail = puu->buffer_tail->next;
     }
-    else
+    else // Buffer was empry.
     {
         puu->buffer_tail = new_buffer_node;
+        puu->buffer_head = new_buffer_node;
     }
 
     puu->counter++;
@@ -139,7 +140,6 @@ void puu_buffer_append_check(struct puu_t *puu, unsigned int addr)
             buffer_node = buffer_node->prev;
         }
     }
-    puu->counter++;
     puu_buffer_append(puu, addr);
 }
 
