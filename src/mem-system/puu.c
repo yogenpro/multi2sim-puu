@@ -69,8 +69,10 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod, int *witness_ptr,
     struct mod_stack_t *stack;
     unsigned int addr_from_buf;
     struct mod_t *memory_mod;
+    struct mod_client_info_t *mod_client_info;
 
     memory_mod = puu_find_memory_mod(puu, mod);
+    mod_client_info = mod_client_info_create(memory_mod);
 
     // Issue writes to memroy
     while (puu->counter--)
@@ -82,11 +84,11 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod, int *witness_ptr,
         mod_stack_id++;
         stack = mod_stack_create(mod_stack_id, memory_mod, addr_from_buf,
             ESIM_EV_NONE, NULL);
-        stack->witness_ptr = witness_ptr;
-        stack->event_queue = event_queue;
+        stack->witness_ptr = NULL;
+        stack->event_queue = NULL;
         // !!! HAVE TO FIGURE OUT WHAT IS EVENT_QUEUE FOR. POSSIBLY UNNECESSARY.
-        stack->event_queue_item = event_queue_item;
-        stack->client_info = client_info;
+        stack->event_queue_item = NULL;
+        stack->client_info = mod_client_info;
 
         esim_execute_event(EV_MOD_LOCAL_MEM_STORE, stack);
     }
