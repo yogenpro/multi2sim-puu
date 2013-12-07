@@ -32,9 +32,7 @@ void puu_free(struct puu_t *puu)
 }
 
 long long puu_access(struct puu_t *puu, struct mod_t *mod,
-    enum puu_access_kind_t access_kind, unsigned int addr, int *witness_ptr,
-    struct linked_list_t *event_queue, void *event_queue_item,
-    struct mod_client_info_t *client_info)
+    enum puu_access_kind_t access_kind, unsigned int addr)
 {
 //	struct mod_stack_t *stack;
 //	int event;
@@ -46,15 +44,13 @@ long long puu_access(struct puu_t *puu, struct mod_t *mod,
 
         if (puu->counter == puu->counter_threshold)
         {
-            puu_buffer_flush(puu, mod, witness_ptr, event_queue,
-                event_queue_item, client_info);
+            puu_buffer_flush(puu, mod);
         }
     }
     else if (access_kind == puu_access_evict)
     {
         // TODO: check and eliminate duplicate entries in buffer.
-        puu_buffer_flush(puu, mod, witness_ptr, event_queue, event_queue_item,
-            client_info);
+        puu_buffer_flush(puu, mod);
     }
 
     return 0;
@@ -62,9 +58,7 @@ long long puu_access(struct puu_t *puu, struct mod_t *mod,
 
 /* Write all buffer entries into main memory.
  */
-void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod, int *witness_ptr,
-    struct linked_list_t *event_queue, void *event_queue_item,
-    struct mod_client_info_t *client_info)
+void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
 {
     struct mod_stack_t *stack;
     unsigned int addr_from_buf;
@@ -86,7 +80,6 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod, int *witness_ptr,
             ESIM_EV_NONE, NULL);
         stack->witness_ptr = NULL;
         stack->event_queue = NULL;
-        // !!! HAVE TO FIGURE OUT WHAT IS EVENT_QUEUE FOR. POSSIBLY UNNECESSARY.
         stack->event_queue_item = NULL;
         stack->client_info = mod_client_info;
 
