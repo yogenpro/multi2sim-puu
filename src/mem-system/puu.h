@@ -13,27 +13,30 @@ enum puu_access_kind_t
 
 struct puu_buffer_entry_t
 {
-    unsigned int addr;
+	unsigned int addr;
+	void *data;
 };
 
-struct puu_buffer_t
+struct puu_buffer_node_t
 {
-    struct puu_buffer_entry_t *entry;
-
-    struct puu_buffer_t *prev; // Elder node.
-    struct puu_buffer_t *next; // Newer node.
+	struct puu_buffer_node_t *prev;
+	struct puu_buffer_node_t *next;
+	struct puu_buffer_entry_t *entry;
+	struct puu_buffer_node_t *head;
+	struct puu_buffer_node_t *tail;
 };
 
 struct puu_t
 {
-    unsigned int counter_threshold;
-    unsigned int counter;
+	unsigned int counter;
+	unsigned int threshold;
 
-    struct puu_buffer_t *buffer;
-    struct puu_buffer_t *buffer_head; // Eldest node.
-    struct puu_buffer_t *buffer_tail; // Newest node.
-    struct puu_buffer_t *buffer_pivot;
+	struct puu_buffer_node_t *buffer1;
+	struct puu_buffer_node_t *buffer2;
+
+	struct puu_buffer_node_t *current_buffer;
 };
+
 
 struct puu_t *puu_create(void);
 void puu_free(struct puu_t *puu);

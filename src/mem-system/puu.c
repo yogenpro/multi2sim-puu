@@ -5,29 +5,35 @@
 #include "mod-stack.h"
 #include "local-mem-protocol.h"
 
-
+// initialize, set threshold
 struct puu_t *puu_create(void)
 {
-    struct puu_t *puu;
+	struct puu_t *puu = xcalloc(1,sizeof(struct puu_t));
 
-    /* Initialize */
-    //puu = (struct puu_t)xcalloc(1,sizeof(struct puu_t));
-    // do not need to make conversion. Ref:	list = xcalloc(1, sizeof(struct list_t)); (src/lib/util/list.c line:99)
-    puu = xcalloc(1, sizeof(struct puu_t));
+	puu->counter = 0;
+	puu->threshold = 20;
+	puu->buffer1 = xcalloc(1,sizeof(struct puu_buffer_node_t));
+	puu->buffer2 = xcalloc(1,sizeof(struct puu_buffer_node_t));
+	puu->buffer1->prev = NULL;
+	puu->buffer1->next = NULL;
+	puu->buffer1->entry = NULL;
+	puu->buffer2->prev = NULL;
+	puu->buffer2->next = NULL;
+	puu->buffer2->entry = NULL;
 
-    puu->counter = 0;
-    puu->counter_threshold = 20; // !!!MAGIC NUMBER HERE!!!
-    puu->buffer = NULL;
-    puu->buffer_head = NULL;
-    puu->buffer_tail = NULL;
-    puu->buffer_pivot = NULL;
+	puu->current_buffer = puu->buffer1;
 
-    return puu;
-};
+	puu->buffer_head = puu->current_buffer;
+	puu->buffer_tail = NULL; // indicate buffer is empty
+}
 
 void puu_free(struct puu_t *puu)
 {
     /* TODO: may have to check if buffer cleared. */
+    free(puu->buffer1->entry);
+    free(puu->buffer1);
+    free(puu->buffer2->entry);
+    free(puu->buffer2);
     free(puu);
 }
 
@@ -64,6 +70,18 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
     unsigned int addr_from_buf;
     struct mod_t *memory_mod;
     struct mod_client_info_t *mod_client_info;
+    struct puu_buffer_node_t *flush_buffer;
+
+    /* buffer switch */
+    flush_buffer = puu->current_buffer;
+    if(flush_buffer==puu->buffer2)
+    {
+        puu->current_buffer = puu->buffer1;
+    }
+    else
+    {
+        puu->current_buffer = puu->buffer2;
+    }
 
     memory_mod = puu_find_memory_mod(puu, mod);
     mod_client_info = mod_client_info_create(memory_mod);
@@ -71,8 +89,8 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
     // Issue writes to memroy
     while (puu->counter--)
     {
-        addr_from_buf = puu->buffer_head->entry->addr;
-        puu_buffer_del_head(puu);
+        addr_from_buf = flush_buffer->head->entry->addr;
+        puu_buffer_del_head(flush_buffer);
 
         // Create module stack for event
         mod_stack_id++;
@@ -92,20 +110,20 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
 void puu_buffer_append(struct puu_t *puu, unsigned int addr)
 {
     struct puu_buffer_entry_t *new_buffer_entry;
-    struct puu_buffer_t *new_buffer_node;
+    struct puu_buffer_node_t *new_buffer_node;
 
     new_buffer_entry = xcalloc(1, sizeof(struct puu_buffer_entry_t));
     new_buffer_entry->addr = addr;
 
-    new_buffer_node = xcalloc(1, sizeof(struct puu_buffer_t));
+    new_buffer_node = xcalloc(1, sizeof(struct puu_buffer_node_t));
     new_buffer_node->entry = new_buffer_entry;
-    new_buffer_node->prev = puu->buffer_tail;
+    new_buffer_node->prev = puu->current_buffer->tail;
     new_buffer_node->next = NULL;
 
-    if (puu->buffer_tail != NULL)
+    if (puu->current_buffer->tail != NULL)
     {
-        puu->buffer_tail->next = new_buffer_node;
-        puu->buffer_tail = puu->buffer_tail->next;
+        puu->current_buffer->tail->next = new_buffer_node;
+        puu->current_buffer->tail = new_buffer_node;
     }
     else // Buffer was empry.
     {
@@ -120,7 +138,7 @@ void puu_buffer_append(struct puu_t *puu, unsigned int addr)
  */
 void puu_buffer_append_check(struct puu_t *puu, unsigned int addr)
 {
-    struct puu_buffer_t *buffer_node;
+    struct puu_buffer_node_t *buffer_node;
 
     buffer_node = puu->buffer_tail;
     if (puu->buffer_tail != NULL)
@@ -140,18 +158,19 @@ void puu_buffer_append_check(struct puu_t *puu, unsigned int addr)
 
 /* Delete eldest entry in buffer.
  */
-void puu_buffer_del_head(struct puu_t *puu)
+void puu_buffer_del_head(struct puu_buffer_node_t *flush_buffer)
 {
     struct puu_buffer_entry_t *head_entry;
 
-    if (puu->buffer_tail == puu->buffer_head) //empty buffer
-    {
-        return;
-    }
+//    can't be empty
+//    if (flush_buffer->buffer_tail == flush_buffer->buffer_head) //empty buffer
+//    {
+//        return;
+//    }
 
-    head_entry = puu->buffer_head->entry;
-    puu->buffer_head = puu->buffer_head->next;
-    puu->buffer_head->prev = NULL;
+    head_entry = flush_buffer->head->entry;
+    flush_buffer->head = flush_buffer->next;
+    flush_buffer->prev = NULL;
     free(head_entry);
 }
 
@@ -163,7 +182,7 @@ struct mod_t *puu_find_memory_mod(struct puu_t *puu, struct mod_t *top_mod)
     struct mod_t *memory_mod;
 
     memory_mod = top_mod;
-    addr_from_buf = puu->buffer_head->entry->addr; // Actually, address 0 would work as well.
+    addr_from_buf = puu->current_buffer->head->entry->addr; // Actually, address 0 would work as well.
     while (1)
     {
         if(memory_mod->kind == mod_kind_main_memory) break;
