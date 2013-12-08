@@ -101,7 +101,7 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
         stack->event_queue_item = NULL;
         stack->client_info = mod_client_info;
 
-        esim_execute_event(EV_MOD_LOCAL_MEM_STORE, stack);
+        esim_execute_event(EV_MOD_NMOESI_STORE, stack);
     }
 }
 
