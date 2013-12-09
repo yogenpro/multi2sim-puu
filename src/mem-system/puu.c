@@ -3,7 +3,7 @@
 #include "memory.h"
 #include "puu.h"
 #include "mod-stack.h"
-#include "local-mem-protocol.h"
+#include "nmoesi-protocol.h"
 
 // initialize, set threshold
 struct puu_t *puu_create(void)
@@ -23,8 +23,11 @@ struct puu_t *puu_create(void)
 
 	puu->current_buffer = puu->buffer1;
 
-	puu->buffer_head = puu->current_buffer;
-	puu->buffer_tail = NULL; // indicate buffer is empty
+	puu->buffer1->head = puu->current_buffer;
+	puu->buffer1->tail = NULL; // indicate buffer is empty
+
+	puu->buffer2->head = puu->buffer2;
+	puu->buffer2->tail = NULL; // indicate buffer is empty
 }
 
 void puu_free(struct puu_t *puu)
@@ -48,7 +51,7 @@ long long puu_access(struct puu_t *puu, struct mod_t *mod,
     {
         puu_buffer_append_check(puu, addr);
 
-        if (puu->counter == puu->counter_threshold)
+        if (puu->counter == puu->threshold)
         {
             puu_buffer_flush(puu, mod);
         }
@@ -127,8 +130,8 @@ void puu_buffer_append(struct puu_t *puu, unsigned int addr)
     }
     else // Buffer was empry.
     {
-        puu->buffer_tail = new_buffer_node;
-        puu->buffer_head = new_buffer_node;
+        puu->current_buffer->tail = new_buffer_node;
+        puu->current_buffer->head = new_buffer_node;
     }
 
     puu->counter++;
@@ -140,8 +143,8 @@ void puu_buffer_append_check(struct puu_t *puu, unsigned int addr)
 {
     struct puu_buffer_node_t *buffer_node;
 
-    buffer_node = puu->buffer_tail;
-    if (puu->buffer_tail != NULL)
+    buffer_node = puu->current_buffer->tail;
+    if (puu->current_buffer->tail != NULL)
     {
         while (buffer_node != NULL)
         {

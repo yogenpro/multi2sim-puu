@@ -47,7 +47,7 @@ long long puu_access(struct puu_t *puu, struct mod_t *mod,
 void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod);
 void puu_buffer_append(struct puu_t *puu, unsigned int addr);
 void puu_buffer_append_check(struct puu_t *puu, unsigned int addr);
-void puu_buffer_del_head(struct puu_t *puu);
+void puu_buffer_del_head(struct puu_buffer_node_t *puu);
 
 struct mod_t *puu_find_memory_mod(struct puu_t *puu, struct mod_t *top_mod);
 #endif // MEM_SYSTEM_PUU_H
