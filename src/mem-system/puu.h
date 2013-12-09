@@ -11,32 +11,14 @@ enum puu_access_kind_t
 	puu_access_evict
 };
 
-struct puu_buffer_entry_t
-{
-	unsigned int addr;
-	void *data;
-};
-
-struct puu_buffer_node_t
-{
-	struct puu_buffer_node_t *prev; /* Elder */
-	struct puu_buffer_node_t *next; /* Younger */
-	struct puu_buffer_entry_t *entry;
-};
-
 struct puu_t
 {
 	unsigned int counter;
 	unsigned int threshold;
 	unsigned int current_buffer;
 
-    /* buffer1 and buffer2 always point to head */
-	struct puu_buffer_node_t *buffer1;
-	struct puu_buffer_node_t *buffer2;
-	struct puu_buffer_node_t *buffer1_head;
-	struct puu_buffer_node_t *buffer1_tail;
-	struct puu_buffer_node_t *buffer2_head;
-	struct puu_buffer_node_t *buffer2_tail;
+	struct linked_list_t *buffer1;
+	struct linked_list_t *buffer2;
 };
 
 

@@ -1,5 +1,6 @@
 #include <lib/mhandle/mhandle.h>
 #include <lib/esim/esim.h>
+#include <lib/util/linked-list.h>
 #include "memory.h"
 #include "puu.h"
 #include "mod-stack.h"
@@ -12,38 +13,16 @@ struct puu_t *puu_create(void)
 
 	puu->counter = 0;
 	puu->threshold = 20;
-	puu->buffer1 = NULL;
-	puu->buffer2 = NULL;
+	puu->buffer1 = linked_list_create();
+	puu->buffer2 = linked_list_create();
 
 	puu->current_buffer = 1;
-
-	puu->buffer1_head = puu->buffer1;
-	puu->buffer1_tail = puu->buffer1;
-
-	puu->buffer2_head = puu->buffer2;
-	puu->buffer2_tail = puu->buffer2;
 }
 
 void puu_free(struct puu_t *puu)
 {
-    struct puu_buffer_node_t *next_node;
-
-    puu->buffer1 = puu->buffer1_head;
-    while (puu->buffer1 != NULL)
-    {
-        next_node = puu->buffer1->next;
-        if (puu->buffer1->entry != NULL) free (puu->buffer1->entry);
-        free(puu->buffer1);
-        puu->buffer1 = next_node;
-    }
-    puu->buffer2 = puu->buffer2_head;
-    while (puu->buffer2 != NULL)
-    {
-        next_node = puu->buffer1->next;
-        if (puu->buffer2->entry != NULL) free (puu->buffer2->entry);
-        free(puu->buffer2);
-        puu->buffer1 = next_node;
-    }
+    linked_list_free(puu->buffer1);
+    linked_list_free(puu->buffer2);
     free(puu);
 }
 
@@ -100,11 +79,11 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
     {
         if (puu->current_buffer = 2)
         {
-            addr_from_buf = puu->buffer1_head->entry->addr;
+            addr_from_buf = puu->buffer1->head->data;
         }
         else
         {
-            addr_from_buf = puu->buffer2_head->entry->addr;
+            addr_from_buf = puu->buffer2->head->data;
         }
         puu_buffer_del_head(puu);
 
@@ -125,51 +104,22 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
  */
 void puu_buffer_append(struct puu_t *puu, unsigned int addr)
 {
-    struct puu_buffer_entry_t *new_buffer_entry;
-    struct puu_buffer_node_t *new_buffer_node;
-    struct puu_buffer_node_t *buffer_tail;
-    struct puu_buffer_node_t *buffer_head;
+    struct linked_list_t *buffer;
+    unsigned int *data;
 
-    new_buffer_entry = xcalloc(1, sizeof(struct puu_buffer_entry_t));
-    new_buffer_entry->addr = addr;
-
-    new_buffer_node = xcalloc(1, sizeof(struct puu_buffer_node_t));
-    new_buffer_node->entry = new_buffer_entry;
-    new_buffer_node->prev = NULL;
-    new_buffer_node->next = NULL;
-
-    if (puu->current_buffer = 1)
+    if (puu->current_buffer == 1)
     {
-        buffer_tail = puu->buffer1_tail;
-        buffer_head = puu->buffer1_head;
+        buffer = puu->buffer1;
     }
     else
     {
-        buffer_tail = puu->buffer2_tail;
-        buffer_head = puu->buffer2_head;
+        buffer = puu->buffer2;
     }
 
-    if (buffer_tail != NULL)
-    {
-        buffer_tail->next = new_buffer_node;
-        new_buffer_node->prev = buffer_tail;
-    }
-    else /* Buffer was empty */
-    {
-        buffer_tail = new_buffer_node;
-        buffer_head = new_buffer_node;
-    }
-
-    if (puu->current_buffer = 1)
-    {
-        puu->buffer1_tail = buffer_tail;
-        puu->buffer1_head = buffer_head;
-    }
-    else
-    {
-        puu->buffer2_tail = buffer_tail;
-        puu->buffer2_head = buffer_head;
-    }
+    data = xcalloc(1, sizeof(unsigned int));
+    *data = addr;
+    linked_list_goto(buffer, buffer->count - 1);
+    linked_list_add(buffer, data);
 
     puu->counter++;
 }
@@ -178,27 +128,24 @@ void puu_buffer_append(struct puu_t *puu, unsigned int addr)
  */
 void puu_buffer_append_check(struct puu_t *puu, unsigned int addr)
 {
-    struct puu_buffer_node_t *buffer_node;
+    struct linked_list_t *buffer;
 
     if (puu->current_buffer == 1)
     {
-        buffer_node = puu->buffer1_head;
+        buffer = puu->buffer1;
     }
     else
     {
-        buffer_node = puu->buffer2_head;
+        buffer = puu->buffer2;
     }
 
-    while (buffer_node != NULL)
+    linked_list_goto(buffer, 0);
+    while (!linked_list_is_end(buffer))
     {
-        if (buffer_node->entry->addr == addr)
-        {
-            // Entry of same address found. No need to append.
-            return;
-        }
-        buffer_node = buffer_node->next;
+        /* if same address exists in buffer, do nothing */
+        if (*(buffer->current->data) == addr) return;
+        linked_list_next(buffer);
     }
-
     puu_buffer_append(puu, addr);
 }
 
@@ -206,25 +153,18 @@ void puu_buffer_append_check(struct puu_t *puu, unsigned int addr)
  */
 void puu_buffer_del_head(struct puu_t *puu)
 {
-    struct puu_buffer_node_t *head_node;
+    struct linked_list_t *buffer;
 
     if (puu->current_buffer == 1)
     {
-        head_node = puu->buffer2_head;
-        puu->buffer2 = head_node->next;
-        puu->buffer2_head = puu->buffer2;
-        puu->buffer2_head->prev = NULL;
+        buffer = puu->buffer2;
     }
     else
     {
-        head_node = puu->buffer1_head;
-        puu->buffer1 = head_node->next;
-        puu->buffer1_head = puu->buffer1;
-        puu->buffer1_head->prev = NULL;
+        buffer = puu->buffer1;
     }
-
-    if (head_node->entry != NULL) free(head_node->entry);
-    free(head_node);
+    linked_list_goto(buffer, 0);
+    linked_list_remove(buffer);
 }
 
 /* Returns the module in the lowest level of given module.
@@ -237,11 +177,11 @@ struct mod_t *puu_find_memory_mod(struct puu_t *puu, struct mod_t *top_mod)
     memory_mod = top_mod;
     if (puu->current_buffer = 2) /* Actually, address 0 would work as well. */
     {
-        addr_from_buf = puu->buffer1_head->entry->addr;
+        addr_from_buf = *(puu->buffer1->head->data);
     }
     else
     {
-        addr_from_buf = puu->buffer2_head->entry->addr;
+        addr_from_buf = *(puu->buffer2->head->data);
     }
     while (1)
     {
