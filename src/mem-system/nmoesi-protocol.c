@@ -32,6 +32,7 @@
 #include "mem-system.h"
 #include "mod-stack.h"
 #include "prefetcher.h"
+#include "puu.h"
 
 
 /* Events */
@@ -266,29 +267,10 @@ void mod_handler_nmoesi_load(int event, void *data)
 			return;
 		}
 
-/*====================PUU Mod begin=========================*/
-        switch(stack->state)
-        {
-            case cache_block_noncoherent:
-                mod->noncoherent_blocks--; break;
-            case cache_block_modified:
-                mod->modified_blocks--; break;
-            case cache_block_exclusive:
-                mod->exclusive_blocks--; break;
-            case cache_block_shared:
-                mod->shared_blocks--; break;
-            case cache_block_invalid:
-                mod->invalid_blocks--; break;
-            default: break;
-        }
-/*====================PUU Mod end===========================*/
 		/* Set block state to excl/shared depending on return var 'shared'.
 		 * Also set the tag of the block. */
 		cache_set_block(mod->cache, stack->set, stack->way, stack->tag,
 			stack->shared ? cache_block_shared : cache_block_exclusive);
-/*====================PUU Mod begin=========================*/
-        stack->shared ? mod->shared_blocks++ : mod->exclusive_blocks++;
-/*====================PUU Mod end===========================*/
 
 		/* Continue */
 		esim_schedule_event(EV_MOD_NMOESI_LOAD_UNLOCK, stack, 0);
@@ -489,28 +471,10 @@ void mod_handler_nmoesi_store(int event, void *data)
 			esim_schedule_event(EV_MOD_NMOESI_STORE_LOCK, stack, retry_lat);
 			return;
 		}
-/*====================PUU Mod begin=========================*/
-        switch(stack->state)
-        {
-            case cache_block_noncoherent:
-                mod->noncoherent_blocks--; break;
-            case cache_block_modified:
-                mod->modified_blocks--; break;
-            case cache_block_exclusive:
-                mod->exclusive_blocks--; break;
-            case cache_block_shared:
-                mod->shared_blocks--; break;
-            case cache_block_invalid:
-                mod->invalid_blocks--; break;
-            default: break;
-        }
-/*====================PUU Mod end===========================*/
+
 		/* Update tag/state and unlock */
 		cache_set_block(mod->cache, stack->set, stack->way,
 			stack->tag, cache_block_modified);
-/*====================PUU Mod begin=========================*/
-        mod->modified_blocks++;
-/*====================PUU Mod end===========================*/
 		dir_entry_unlock(mod->dir, stack->set, stack->way);
 
 		/* Impose the access latency before continuing */
@@ -753,29 +717,10 @@ void mod_handler_nmoesi_nc_store(int event, void *data)
 		mem_trace("mem.access name=\"A-%lld\" state=\"%s:nc_store_unlock\"\n",
 			stack->id, mod->name);
 
-/*====================PUU Mod begin=========================*/
-        switch(stack->state)
-        {
-            case cache_block_noncoherent:
-                mod->noncoherent_blocks--; break;
-            case cache_block_modified:
-                mod->modified_blocks--; break;
-            case cache_block_exclusive:
-                mod->exclusive_blocks--; break;
-            case cache_block_shared:
-                mod->shared_blocks--; break;
-            case cache_block_invalid:
-                mod->invalid_blocks--; break;
-            default: break;
-        }
-/*====================PUU Mod end===========================*/
 		/* Set block state to excl/shared depending on return var 'shared'.
 		 * Also set the tag of the block. */
 		cache_set_block(mod->cache, stack->set, stack->way, stack->tag,
 			cache_block_noncoherent);
-/*====================PUU Mod begin=========================*/
-        mod->noncoherent_blocks++;
-/*====================PUU Mod end===========================*/
 
 		/* Unlock directory entry */
 		dir_entry_unlock(mod->dir, stack->set, stack->way);
@@ -960,29 +905,10 @@ void mod_handler_nmoesi_prefetch(int event, void *data)
 			return;
 		}
 
-/*====================PUU Mod begin=========================*/
-        switch(stack->state)
-        {
-            case cache_block_noncoherent:
-                mod->noncoherent_blocks--; break;
-            case cache_block_modified:
-                mod->modified_blocks--; break;
-            case cache_block_exclusive:
-                mod->exclusive_blocks--; break;
-            case cache_block_shared:
-                mod->shared_blocks--; break;
-            case cache_block_invalid:
-                mod->invalid_blocks--; break;
-            default: break;
-        }
-/*====================PUU Mod end===========================*/
 		/* Set block state to excl/shared depending on return var 'shared'.
 		 * Also set the tag of the block. */
 		cache_set_block(mod->cache, stack->set, stack->way, stack->tag,
 			stack->shared ? cache_block_shared : cache_block_exclusive);
-/*====================PUU Mod begin=========================*/
-        stack->shared ? mod->shared_blocks++ : mod->exclusive_blocks++;
-/*====================PUU Mod end===========================*/
 
 		/* Mark the prefetched block as prefetched. This is needed to let the
 		 * prefetcher know about an actual access to this block so that it
@@ -1308,28 +1234,9 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 		 * in the directory. */
 		if (mod->kind == mod_kind_main_memory && !stack->state)
 		{
-/*====================PUU Mod begin=========================*/
-        switch(stack->state)
-        {
-            case cache_block_noncoherent:
-                mod->noncoherent_blocks--; break;
-            case cache_block_modified:
-                mod->modified_blocks--; break;
-            case cache_block_exclusive:
-                mod->exclusive_blocks--; break;
-            case cache_block_shared:
-                mod->shared_blocks--; break;
-            case cache_block_invalid:
-                mod->invalid_blocks--; break;
-            default: break;
-        }
-/*====================PUU Mod end===========================*/
 			stack->state = cache_block_exclusive;
 			cache_set_block(mod->cache, stack->set, stack->way,
 				stack->tag, stack->state);
-/*====================PUU Mod begin=========================*/
-            mod->exclusive_blocks++;
-/*====================PUU Mod end===========================*/
 		}
 
 		/* Return */
@@ -1402,23 +1309,6 @@ void mod_handler_nmoesi_evict(int event, void *data)
 		 * and finish. */
 		if (mod->kind == mod_kind_main_memory)
 		{
-/*====================PUU Mod begin=========================*/
-            switch(stack->state)
-            {
-                case cache_block_noncoherent:
-                    mod->noncoherent_blocks--; break;
-                case cache_block_modified:
-                    mod->modified_blocks--; break;
-                case cache_block_exclusive:
-                    mod->exclusive_blocks--; break;
-                case cache_block_shared:
-                    mod->shared_blocks--; break;
-                case cache_block_invalid:
-                    mod->invalid_blocks--; break;
-                default: break;
-            }
-            mod->invalid_blocks++;
-/*====================PUU Mod end===========================*/
 			cache_set_block(mod->cache, stack->src_set, stack->src_way,
 				0, cache_block_invalid);
 			esim_schedule_event(EV_MOD_NMOESI_EVICT_FINISH, stack, 0);
@@ -1426,7 +1316,9 @@ void mod_handler_nmoesi_evict(int event, void *data)
 		}
 
 		/* If module is last-level cache, evict to puu. */
-		if (mod->low_mod_list->head->data->kind == mod_kind_main_memory)
+		struct mod_t *low_level_mod;
+		low_level_mod = mod_get_low_mod(mod, stack->addr);
+		if (low_level_mod->kind == mod_kind_main_memory)
         {
             /* evict to puu */
             puu_access(mem_system->puu, mod, puu_access_evict, stack->addr);
@@ -1547,10 +1439,6 @@ void mod_handler_nmoesi_evict(int event, void *data)
 		{
 			if (stack->state == cache_block_exclusive)
 			{
-/*====================PUU Mod begin=========================*/
-                mod->exclusive_blocks--;
-                mod->modified_blocks++;
-/*====================PUU Mod end===========================*/
 				cache_set_block(target_mod->cache, stack->set, stack->way,
 					stack->tag, cache_block_modified);
 			}
@@ -1621,10 +1509,6 @@ void mod_handler_nmoesi_evict(int event, void *data)
 		{
 			if (stack->state == cache_block_exclusive)
 			{
-/*====================PUU Mod begin=========================*/
-                mod->exclusive_blocks--;
-                mod->modified_blocks++;
-/*====================PUU Mod end===========================*/
 				cache_set_block(target_mod->cache, stack->set, stack->way,
 					stack->tag, cache_block_modified);
 			}
@@ -1636,23 +1520,6 @@ void mod_handler_nmoesi_evict(int event, void *data)
 			else if (stack->state == cache_block_shared ||
 				stack->state == cache_block_noncoherent)
 			{
-/*====================PUU Mod begin=========================*/
-                switch(stack->state)
-                {
-                    case cache_block_noncoherent:
-                        mod->noncoherent_blocks--; break;
-                    case cache_block_modified:
-                        mod->modified_blocks--; break;
-                    case cache_block_exclusive:
-                        mod->exclusive_blocks--; break;
-                    case cache_block_shared:
-                        mod->shared_blocks--; break;
-                    case cache_block_invalid:
-                        mod->invalid_blocks--; break;
-                    default: break;
-                }
-                mod->noncoherent_blocks++;
-/*====================PUU Mod end===========================*/
 				cache_set_block(target_mod->cache, stack->set, stack->way,
 					stack->tag, cache_block_noncoherent);
 			}
@@ -1727,23 +1594,6 @@ void mod_handler_nmoesi_evict(int event, void *data)
 		/* Invalidate block if there was no error. */
 		if (!stack->err)
         {
-/*====================PUU Mod begin=========================*/
-            switch(stack->state)
-            {
-                case cache_block_noncoherent:
-                    mod->noncoherent_blocks--; break;
-                case cache_block_modified:
-                    mod->modified_blocks--; break;
-                case cache_block_exclusive:
-                    mod->exclusive_blocks--; break;
-                case cache_block_shared:
-                    mod->shared_blocks--; break;
-                case cache_block_invalid:
-                    mod->invalid_blocks--; break;
-                default: break;
-            }
-            mod->invalid_blocks++;
-/*====================PUU Mod end===========================*/
             cache_set_block(mod->cache, stack->src_set, stack->src_way,
 				0, cache_block_invalid);
         }
@@ -1991,23 +1841,6 @@ void mod_handler_nmoesi_read_request(int event, void *data)
 			return;
 		}
 
-/*====================PUU Mod begin=========================*/
-            switch(stack->state)
-            {
-                case cache_block_noncoherent:
-                    mod->noncoherent_blocks--; break;
-                case cache_block_modified:
-                    mod->modified_blocks--; break;
-                case cache_block_exclusive:
-                    mod->exclusive_blocks--; break;
-                case cache_block_shared:
-                    mod->shared_blocks--; break;
-                case cache_block_invalid:
-                    mod->invalid_blocks--; break;
-                default: break;
-            }
-            stack->shared ? mod->shared_blocks++ : mod->exclusive_blocks++;
-/*====================PUU Mod end===========================*/
 		/* Set block state to excl/shared depending on the return value 'shared'
 		 * that comes from a read request into the next cache level.
 		 * Also set the tag of the block. */
@@ -2208,23 +2041,6 @@ void mod_handler_nmoesi_read_request(int event, void *data)
 
 			if (stack->peer)
 			{
-/*====================PUU Mod begin=========================*/
-                switch(stack->state)
-                {
-                    case cache_block_noncoherent:
-                        mod->noncoherent_blocks--; break;
-                    case cache_block_modified:
-                        mod->modified_blocks--; break;
-                    case cache_block_exclusive:
-                        mod->exclusive_blocks--; break;
-                    case cache_block_shared:
-                        mod->shared_blocks--; break;
-                    case cache_block_invalid:
-                        mod->invalid_blocks--; break;
-                    default: break;
-                }
-                mod->owned_blocks++;
-/*====================PUU Mod end===========================*/
 				/* Peer was found, so this directory entry should be changed
 				 * to owned */
 				cache_set_block(target_mod->cache, stack->set, stack->way,
@@ -2255,23 +2071,6 @@ void mod_handler_nmoesi_read_request(int event, void *data)
 			}
 			else
 			{
-    /*====================PUU Mod begin=========================*/
-            switch(stack->state)
-            {
-                case cache_block_noncoherent:
-                    mod->noncoherent_blocks--; break;
-                case cache_block_modified:
-                    mod->modified_blocks--; break;
-                case cache_block_exclusive:
-                    mod->exclusive_blocks--; break;
-                case cache_block_shared:
-                    mod->shared_blocks--; break;
-                case cache_block_invalid:
-                    mod->invalid_blocks--; break;
-                default: break;
-            }
-            mod->shared_blocks++;
-/*====================PUU Mod end===========================*/
 				/* Set state to shared */
 				cache_set_block(target_mod->cache, stack->set, stack->way,
 					stack->tag, cache_block_shared);
@@ -2296,23 +2095,6 @@ void mod_handler_nmoesi_read_request(int event, void *data)
 			/* Higher-level cache was exclusive with no modifications above it */
 			stack->reply_size = 8;
 
-/*====================PUU Mod begin=========================*/
-            switch(stack->state)
-            {
-                case cache_block_noncoherent:
-                    mod->noncoherent_blocks--; break;
-                case cache_block_modified:
-                    mod->modified_blocks--; break;
-                case cache_block_exclusive:
-                    mod->exclusive_blocks--; break;
-                case cache_block_shared:
-                    mod->shared_blocks--; break;
-                case cache_block_invalid:
-                    mod->invalid_blocks--; break;
-                default: break;
-            }
-            mod->shared_blocks++;
-/*====================PUU Mod end===========================*/
 			/* Set state to shared */
 			cache_set_block(target_mod->cache, stack->set, stack->way,
 				stack->tag, cache_block_shared);
@@ -2358,22 +2140,6 @@ void mod_handler_nmoesi_read_request(int event, void *data)
 				ret->reply_size -= target_mod->sub_block_size;
 				assert(ret->reply_size >= 8);
 
-/*====================PUU Mod begin=========================*/
-                switch(stack->state)
-                {
-                    case cache_block_noncoherent:
-                        mod->noncoherent_blocks--; break;
-                    case cache_block_modified:
-                        mod->modified_blocks--; break;
-                    case cache_block_exclusive:
-                        mod->exclusive_blocks--; break;
-                    case cache_block_shared:
-                        mod->shared_blocks--; break;
-                    case cache_block_invalid:
-                        mod->invalid_blocks--; break;
-                    default: break;
-                }
-/*====================PUU Mod end===========================*/
 				if (stack->state == cache_block_modified ||
 					stack->state == cache_block_owned)
 				{
@@ -2383,9 +2149,6 @@ void mod_handler_nmoesi_read_request(int event, void *data)
 					/* Set block to owned */
 					cache_set_block(target_mod->cache, stack->set, stack->way,
 						stack->tag, cache_block_owned);
-/*====================PUU Mod begin=========================*/
-                    mod->owned_blocks++;
-/*====================PUU Mod end===========================*/
 				}
 				else
 				{
@@ -2393,9 +2156,6 @@ void mod_handler_nmoesi_read_request(int event, void *data)
 					/* Set block to shared */
 					cache_set_block(target_mod->cache, stack->set, stack->way,
 						stack->tag, cache_block_shared);
-/*====================PUU Mod begin=========================*/
-                    mod->shared_blocks++;
-/*====================PUU Mod end===========================*/
 				}
 			}
 			else
@@ -2420,23 +2180,6 @@ void mod_handler_nmoesi_read_request(int event, void *data)
 					fatal("Invalid cache block state: %d\n", stack->state);
 				}
 
-/*====================PUU Mod begin=========================*/
-                switch(stack->state)
-                {
-                    case cache_block_noncoherent:
-                        mod->noncoherent_blocks--; break;
-                    case cache_block_modified:
-                        mod->modified_blocks--; break;
-                    case cache_block_exclusive:
-                        mod->exclusive_blocks--; break;
-                    case cache_block_shared:
-                        mod->shared_blocks--; break;
-                    case cache_block_invalid:
-                        mod->invalid_blocks--; break;
-                    default: break;
-                }
-                mod->shared_blocks++;
-/*====================PUU Mod end===========================*/
 				/* Set block to shared */
 				cache_set_block(target_mod->cache, stack->set, stack->way,
 					stack->tag, cache_block_shared);
@@ -2727,23 +2470,6 @@ void mod_handler_nmoesi_write_request(int event, void *data)
 			assert(dir_entry->num_sharers == 1);
 		}
 
-/*====================PUU Mod begin=========================*/
-        switch(stack->state)
-        {
-            case cache_block_noncoherent:
-                mod->noncoherent_blocks--; break;
-            case cache_block_modified:
-                mod->modified_blocks--; break;
-            case cache_block_exclusive:
-                mod->exclusive_blocks--; break;
-            case cache_block_shared:
-                mod->shared_blocks--; break;
-            case cache_block_invalid:
-                mod->invalid_blocks--; break;
-            default: break;
-        }
-        mod->exclusive_blocks++;
-/*====================PUU Mod end===========================*/
 		/* Set state to exclusive */
 		cache_set_block(target_mod->cache, stack->set, stack->way,
 			stack->tag, cache_block_exclusive);
@@ -2844,23 +2570,6 @@ void mod_handler_nmoesi_write_request(int event, void *data)
 		mem_trace("mem.access name=\"A-%lld\" state=\"%s:write_request_downup_finish\"\n",
 			stack->id, target_mod->name);
 
-/*====================PUU Mod begin=========================*/
-        switch(stack->state)
-        {
-            case cache_block_noncoherent:
-                mod->noncoherent_blocks--; break;
-            case cache_block_modified:
-                mod->modified_blocks--; break;
-            case cache_block_exclusive:
-                mod->exclusive_blocks--; break;
-            case cache_block_shared:
-                mod->shared_blocks--; break;
-            case cache_block_invalid:
-                mod->invalid_blocks--; break;
-            default: break;
-        }
-        mod->invalid_blocks++;
-/*====================PUU Mod end===========================*/
 		/* Set state to I, unlock*/
 		cache_set_block(target_mod->cache, stack->set, stack->way, 0, cache_block_invalid);
 		dir_entry_unlock(target_mod->dir, stack->set, stack->way);
@@ -3078,23 +2787,6 @@ void mod_handler_nmoesi_invalidate(int event, void *data)
 
 		if (stack->reply == reply_ack_data)
         {
-/*====================PUU Mod begin=========================*/
-        switch(stack->state)
-        {
-            case cache_block_noncoherent:
-                mod->noncoherent_blocks--; break;
-            case cache_block_modified:
-                mod->modified_blocks--; break;
-            case cache_block_exclusive:
-                mod->exclusive_blocks--; break;
-            case cache_block_shared:
-                mod->shared_blocks--; break;
-            case cache_block_invalid:
-                mod->invalid_blocks--; break;
-            default: break;
-        }
-        mod->modified_blocks++;
-/*====================PUU Mod end===========================*/
             cache_set_block(mod->cache, stack->set, stack->way, stack->tag,
 				cache_block_modified);
         }

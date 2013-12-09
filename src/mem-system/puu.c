@@ -55,15 +55,17 @@ long long puu_access(struct puu_t *puu, struct mod_t *mod,
             buffer = puu->buffer2;
         }
         linked_list_goto(buffer, 0);
-        while (linked_list_current(buffer) != NULL)
+
+        unsigned int entry_addr;
+        LINKED_LIST_FOR_EACH(buffer)
         {
-            /* if (tag segment of buffer entry == tag of evicted block) */
-            if (*((int *)(buffer->current->data)) >> mod->cache->log_block_size == addr)
+            entry_addr = *((int *)(buffer->current->data));
+            if (entry_addr >> (mod->cache->log_block_size) == addr)
             {
                 linked_list_remove(buffer);
             }
         }
-        puu_buffer_append(buffer, addr);
+        puu_buffer_append(puu, addr);
         puu_buffer_flush(puu, mod);
     }
 
