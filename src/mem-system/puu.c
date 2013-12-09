@@ -12,31 +12,38 @@ struct puu_t *puu_create(void)
 
 	puu->counter = 0;
 	puu->threshold = 20;
-	puu->buffer1 = xcalloc(1,sizeof(struct puu_buffer_node_t));
-	puu->buffer2 = xcalloc(1,sizeof(struct puu_buffer_node_t));
-	puu->buffer1->prev = NULL;
-	puu->buffer1->next = NULL;
-	puu->buffer1->entry = NULL;
-	puu->buffer2->prev = NULL;
-	puu->buffer2->next = NULL;
-	puu->buffer2->entry = NULL;
+	puu->buffer1 = NULL;
+	puu->buffer2 = NULL;
 
-	puu->current_buffer = puu->buffer1;
+	puu->current_buffer = 1;
 
-	puu->buffer1->head = puu->current_buffer;
-	puu->buffer1->tail = NULL; // indicate buffer is empty
+	puu->buffer1_head = puu->buffer1;
+	puu->buffer1_tail = puu->buffer1;
 
-	puu->buffer2->head = puu->buffer2;
-	puu->buffer2->tail = NULL; // indicate buffer is empty
+	puu->buffer2_head = puu->buffer2;
+	puu->buffer2_tail = puu->buffer2;
 }
 
 void puu_free(struct puu_t *puu)
 {
-    /* TODO: may have to check if buffer cleared. */
-    free(puu->buffer1->entry);
-    free(puu->buffer1);
-    free(puu->buffer2->entry);
-    free(puu->buffer2);
+    struct puu_buffer_node_t *next_node;
+
+    puu->buffer1 = puu->buffer1_head;
+    while (puu->buffer1 != NULL)
+    {
+        next_node = puu->buffer1->next;
+        if (puu->buffer1->entry != NULL) free (puu->buffer1->entry);
+        free(puu->buffer1);
+        puu->buffer1 = next_node;
+    }
+    puu->buffer2 = puu->buffer2_head;
+    while (puu->buffer2 != NULL)
+    {
+        next_node = puu->buffer1->next;
+        if (puu->buffer2->entry != NULL) free (puu->buffer2->entry);
+        free(puu->buffer2);
+        puu->buffer1 = next_node;
+    }
     free(puu);
 }
 
@@ -51,7 +58,7 @@ long long puu_access(struct puu_t *puu, struct mod_t *mod,
     {
         puu_buffer_append_check(puu, addr);
 
-        if (puu->counter == puu->threshold)
+        if (puu->counter >= puu->threshold)
         {
             puu_buffer_flush(puu, mod);
         }
@@ -76,14 +83,13 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
     struct puu_buffer_node_t *flush_buffer;
 
     /* buffer switch */
-    flush_buffer = puu->current_buffer;
-    if(flush_buffer==puu->buffer2)
+    if (puu->current_buffer == 1)
     {
-        puu->current_buffer = puu->buffer1;
+        puu->current_buffer = 2;
     }
     else
     {
-        puu->current_buffer = puu->buffer2;
+        puu->current_buffer = 1;
     }
 
     memory_mod = puu_find_memory_mod(puu, mod);
@@ -92,8 +98,15 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
     // Issue writes to memroy
     while (puu->counter--)
     {
-        addr_from_buf = flush_buffer->head->entry->addr;
-        puu_buffer_del_head(flush_buffer);
+        if (puu->current_buffer = 2)
+        {
+            addr_from_buf = puu->buffer1_head->entry->addr;
+        }
+        else
+        {
+            addr_from_buf = puu->buffer2->entry->addr;
+        }
+        puu_buffer_del_head(puu);
 
         // Create module stack for event
         mod_stack_id++;
@@ -114,24 +127,48 @@ void puu_buffer_append(struct puu_t *puu, unsigned int addr)
 {
     struct puu_buffer_entry_t *new_buffer_entry;
     struct puu_buffer_node_t *new_buffer_node;
+    struct puu_buffer_node_t *buffer_tail;
+    struct puu_buffer_node_t *buffer_head;
 
     new_buffer_entry = xcalloc(1, sizeof(struct puu_buffer_entry_t));
     new_buffer_entry->addr = addr;
 
     new_buffer_node = xcalloc(1, sizeof(struct puu_buffer_node_t));
     new_buffer_node->entry = new_buffer_entry;
-    new_buffer_node->prev = puu->current_buffer->tail;
+    new_buffer_node->prev = NULL;
     new_buffer_node->next = NULL;
 
-    if (puu->current_buffer->tail != NULL)
+    if (puu->current_buffer = 1)
     {
-        puu->current_buffer->tail->next = new_buffer_node;
-        puu->current_buffer->tail = new_buffer_node;
+        buffer_tail = puu->buffer1_tail;
+        buffer_head = puu->buffer1_head;
     }
-    else // Buffer was empry.
+    else
     {
-        puu->current_buffer->tail = new_buffer_node;
-        puu->current_buffer->head = new_buffer_node;
+        buffer_tail = puu->buffer2_tail;
+        buffer_head = puu->buffer2_head;
+    }
+
+    if (buffer_tail != NULL)
+    {
+        buffer_tail->next = new_buffer_node;
+        new_buffer_node->prev = buffer_tail;
+    }
+    else /* Buffer was empty */
+    {
+        buffer_tail = new_buffer_node;
+        buffer_head = new_buffer_node;
+    }
+
+    if (puu->current_buffer = 1)
+    {
+        puu->buffer1_tail = buffer_tail;
+        puu->buffer1_head = buffer_head;
+    }
+    else
+    {
+        puu->buffer2_tail = buffer_tail;
+        puu->buffer2_head = buffer_head;
     }
 
     puu->counter++;
@@ -143,38 +180,51 @@ void puu_buffer_append_check(struct puu_t *puu, unsigned int addr)
 {
     struct puu_buffer_node_t *buffer_node;
 
-    buffer_node = puu->current_buffer->tail;
-    if (puu->current_buffer->tail != NULL)
+    if (puu->current_buffer == 1)
     {
-        while (buffer_node != NULL)
-        {
-            if (buffer_node->entry->addr == addr)
-            {
-                // Entry of same address found. No need to append.
-                return;
-            }
-            buffer_node = buffer_node->prev;
-        }
+        buffer_node = puu->buffer1_head;
     }
+    else
+    {
+        buffer_node = puu->buffer2_head;
+    }
+
+    while (buffer_node != NULL)
+    {
+        if (buffer_node->entry->addr == addr)
+        {
+            // Entry of same address found. No need to append.
+            return;
+        }
+        buffer_node = buffer_node->next;
+    }
+
     puu_buffer_append(puu, addr);
 }
 
-/* Delete eldest entry in buffer.
+/* Delete eldest entry in the flushing buffer.
  */
-void puu_buffer_del_head(struct puu_buffer_node_t *flush_buffer)
+void puu_buffer_del_head(struct puu_t *puu)
 {
-    struct puu_buffer_entry_t *head_entry;
+    struct puu_buffer_node_t *head_node;
 
-//    can't be empty
-//    if (flush_buffer->buffer_tail == flush_buffer->buffer_head) //empty buffer
-//    {
-//        return;
-//    }
+    if (puu->current_buffer == 1)
+    {
+        head_node = puu->buffer2_head;
+        puu->buffer2 = head_node->next;
+        puu->buffer2_head = puu->buffer2;
+        puu->buffer2_head->prev = NULL;
+    }
+    else
+    {
+        head_node = puu->buffer1_head;
+        puu->buffer1 = head_node->next;
+        puu->buffer1_head = puu->buffer1;
+        puu->buffer1_head->prev = NULL;
+    }
 
-    head_entry = flush_buffer->head->entry;
-    flush_buffer->head = flush_buffer->next;
-    flush_buffer->prev = NULL;
-    free(head_entry);
+    if (head_node->entry != NULL) free(head_node->entry);
+    free(head_node);
 }
 
 /* Returns the module in the lowest level of given module.
