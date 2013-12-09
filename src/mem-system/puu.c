@@ -17,6 +17,8 @@ struct puu_t *puu_create(void)
 	puu->buffer2 = linked_list_create();
 
 	puu->current_buffer = 1;
+
+	return puu;
 }
 
 void puu_free(struct puu_t *puu)
@@ -72,7 +74,7 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
     }
 
     memory_mod = puu_find_memory_mod(puu, mod);
-    mod_client_info = mod_client_info_create(memory_mod);
+
 
     // Issue writes to memroy
     while (puu->counter--)
@@ -89,6 +91,7 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
 
         // Create module stack for event
         mod_stack_id++;
+        mod_client_info = mod_client_info_create(memory_mod);
         stack = mod_stack_create(mod_stack_id, memory_mod, addr_from_buf,
             ESIM_EV_NONE, NULL);
         stack->witness_ptr = NULL;
@@ -143,7 +146,7 @@ void puu_buffer_append_check(struct puu_t *puu, unsigned int addr)
     while (!linked_list_is_end(buffer))
     {
         /* if same address exists in buffer, do nothing */
-        if (*(buffer->current->data) == addr) return;
+        if ((int *)(buffer->current->data) == addr) return;
         linked_list_next(buffer);
     }
     puu_buffer_append(puu, addr);
@@ -177,11 +180,11 @@ struct mod_t *puu_find_memory_mod(struct puu_t *puu, struct mod_t *top_mod)
     memory_mod = top_mod;
     if (puu->current_buffer = 2) /* Actually, address 0 would work as well. */
     {
-        addr_from_buf = *(puu->buffer1->head->data);
+        addr_from_buf = (int *)(puu->buffer1->head->data);
     }
     else
     {
-        addr_from_buf = *(puu->buffer2->head->data);
+        addr_from_buf = (int *)(puu->buffer2->head->data);
     }
     while (1)
     {
