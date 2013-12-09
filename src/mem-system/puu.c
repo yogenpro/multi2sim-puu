@@ -2,6 +2,8 @@
 #include <lib/esim/esim.h>
 #include <lib/util/linked-list.h>
 #include <lib/util/misc.h>
+
+#include "cache.h"
 #include "memory.h"
 #include "puu.h"
 #include "mod-stack.h"
