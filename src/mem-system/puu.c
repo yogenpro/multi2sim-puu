@@ -104,7 +104,7 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
         }
         else
         {
-            addr_from_buf = puu->buffer2->entry->addr;
+            addr_from_buf = puu->buffer2_head->entry->addr;
         }
         puu_buffer_del_head(puu);
 
@@ -235,7 +235,14 @@ struct mod_t *puu_find_memory_mod(struct puu_t *puu, struct mod_t *top_mod)
     struct mod_t *memory_mod;
 
     memory_mod = top_mod;
-    addr_from_buf = puu->current_buffer->head->entry->addr; // Actually, address 0 would work as well.
+    if (puu->current_buffer = 2) /* Actually, address 0 would work as well. */
+    {
+        addr_from_buf = puu->buffer1_head->entry->addr;
+    }
+    else
+    {
+        addr_from_buf = puu->buffer2_head->entry->addr;
+    }
     while (1)
     {
         if(memory_mod->kind == mod_kind_main_memory) break;
