@@ -77,15 +77,15 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
 
 
     // Issue writes to memroy
-    while (puu->counter--)
+    while (puu->counter > 0)
     {
-        if (puu->current_buffer = 2)
+        if (puu->current_buffer == 2)
         {
-            addr_from_buf = puu->buffer1->head->data;
+            addr_from_buf = *((int *)(puu->buffer1->head->data));
         }
         else
         {
-            addr_from_buf = puu->buffer2->head->data;
+            addr_from_buf = *((int *)(puu->buffer2->head->data));
         }
         puu_buffer_del_head(puu);
 
@@ -146,7 +146,7 @@ void puu_buffer_append_check(struct puu_t *puu, unsigned int addr)
     while (!linked_list_is_end(buffer))
     {
         /* if same address exists in buffer, do nothing */
-        if ((int *)(buffer->current->data) == addr) return;
+        if (*((int *)(buffer->current->data)) == addr) return;
         linked_list_next(buffer);
     }
     puu_buffer_append(puu, addr);
@@ -168,6 +168,8 @@ void puu_buffer_del_head(struct puu_t *puu)
     }
     linked_list_goto(buffer, 0);
     linked_list_remove(buffer);
+
+    puu->counter--;
 }
 
 /* Returns the module in the lowest level of given module.
@@ -178,13 +180,13 @@ struct mod_t *puu_find_memory_mod(struct puu_t *puu, struct mod_t *top_mod)
     struct mod_t *memory_mod;
 
     memory_mod = top_mod;
-    if (puu->current_buffer = 2) /* Actually, address 0 would work as well. */
+    if (puu->current_buffer == 2) /* Actually, address 0 would work as well. */
     {
-        addr_from_buf = (int *)(puu->buffer1->head->data);
+        addr_from_buf = *((int *)(puu->buffer1->head->data));
     }
     else
     {
-        addr_from_buf = (int *)(puu->buffer2->head->data);
+        addr_from_buf = *((int *)(puu->buffer2->head->data));
     }
     while (1)
     {
