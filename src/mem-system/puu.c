@@ -1,6 +1,7 @@
 #include <lib/mhandle/mhandle.h>
 #include <lib/esim/esim.h>
 #include <lib/util/linked-list.h>
+#include <lib/util/misc.h>
 #include "memory.h"
 #include "puu.h"
 #include "mod-stack.h"
@@ -31,9 +32,7 @@ void puu_free(struct puu_t *puu)
 long long puu_access(struct puu_t *puu, struct mod_t *mod,
     enum puu_access_kind_t access_kind, unsigned int addr)
 {
-//	struct mod_stack_t *stack;
-//	int event;
-//	unsigned int addr_from_buf;
+    struct linked_list_t *buffer;
 
     if (access_kind == puu_access_write)
     {
@@ -47,6 +46,24 @@ long long puu_access(struct puu_t *puu, struct mod_t *mod,
     else if (access_kind == puu_access_evict)
     {
         // TODO: check and eliminate duplicate entries in buffer.
+        if (puu->current_buffer == 1)
+        {
+            buffer = puu->buffer1;
+        }
+        else
+        {
+            buffer = puu->buffer2;
+        }
+        linked_list_goto(buffer, 0);
+        while (linked_list_current(buffer) != NULL)
+        {
+            /* if (tag segment of buffer entry == tag of evicted block) */
+            if (*((int *)(buffer->current->data)) >> mod->cache->log_block_size == addr)
+            {
+                linked_list_remove(buffer);
+            }
+        }
+        puu_buffer_append(buffer, addr);
         puu_buffer_flush(puu, mod);
     }
 

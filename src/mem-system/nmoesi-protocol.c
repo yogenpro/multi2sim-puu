@@ -1425,6 +1425,19 @@ void mod_handler_nmoesi_evict(int event, void *data)
 			return;
 		}
 
+		/* If module is last-level cache, evict to puu. */
+		if (mod->low_mod_list->head->data->kind == mod_kind_main_memory)
+        {
+            /* evict to puu */
+            puu_access(mem_system->puu, mod, puu_access_evict, stack->addr);
+
+            /* evict done, invalidate block */
+            cache_set_block(mod->cache, stack->src_set, stack->src_way,
+                0, cache_block_invalid);
+            esim_schedule_event(EV_MOD_NMOESI_EVICT_FINISH, stack, 0);
+            return;
+        }
+
 		/* Continue */
 		esim_schedule_event(EV_MOD_NMOESI_EVICT_ACTION, stack, 0);
 		return;
