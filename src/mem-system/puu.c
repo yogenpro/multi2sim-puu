@@ -16,10 +16,12 @@ struct puu_t *puu_create(void)
 
 	puu->counter = 0;
 	puu->threshold = 20;
+
 	puu->buffer1 = linked_list_create();
 	puu->buffer2 = linked_list_create();
-
 	puu->current_buffer = 1;
+
+    puu->write_count = 0;
 
 	return puu;
 }
@@ -64,11 +66,10 @@ long long puu_access(struct puu_t *puu, struct mod_t *mod,
             entry_addr = *((int *)(buffer->current->data));
             if (entry_addr >> (mod->cache->log_block_size) == addr)
             {
-                linked_list_remove(buffer);
+                puu_buffer_flush(puu, mod);
+                break;
             }
         }
-        puu_buffer_append(puu, addr);
-        puu_buffer_flush(puu, mod);
     }
 
     return 0;
@@ -121,6 +122,7 @@ void puu_buffer_flush(struct puu_t *puu, struct mod_t *mod)
         stack->client_info = mod_client_info;
 
         esim_execute_event(EV_MOD_NMOESI_STORE, stack);
+        puu->write_count++;
     }
 }
 
@@ -216,4 +218,9 @@ struct mod_t *puu_find_memory_mod(struct puu_t *puu, struct mod_t *top_mod)
     }
 
     return memory_mod;
-};
+}
+
+int puu_buffer_entry_comp(int *addr1, int *addr2)
+{
+    return (*addr1 - *addr2);
+}
