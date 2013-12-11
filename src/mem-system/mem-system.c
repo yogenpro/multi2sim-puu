@@ -391,6 +391,9 @@ void mem_system_dump_report(void)
         /* Eliminate duplicate entries */
         LINKED_LIST_FOR_EACH(puu_buffer)
         {
+            /* If at last node, no need to compare (no next node) */
+            if (puu_buffer->current_index == puu_buffer->count - 1) break;
+
             addr1 = *((int *)(puu_buffer->current->data));
             addr2 = *((int *)(puu_buffer->current->next->data));
             while (addr1 == addr2)
@@ -399,7 +402,7 @@ void mem_system_dump_report(void)
                 linked_list_remove(puu_buffer); /* Current element is next */
                 if (puu_buffer->current_index == puu_buffer->count)
                 {
-                    addr2 = addr1 + 1; /* whatever, addr2 != addr1 is fine */
+                    break;
                 }
                 else
                 {
