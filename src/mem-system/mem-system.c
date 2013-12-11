@@ -23,6 +23,7 @@
 #include <lib/util/debug.h>
 #include <lib/util/file.h>
 #include <lib/util/list.h>
+#include <lib/util/linked-list.h>
 #include <lib/util/string.h>
 #include <network/network.h>
 
@@ -353,12 +354,12 @@ void mem_system_dump_report(void)
     struct linked_list_t *puu_buffer;
 
     /* Find L2 cache (for block size) */
-    LINKED_LIST_FOR_EACH(mem_system->mod_list)
-    {
-        mod = linked_list_get(mem_system->mod_list);
+    for (i = 0; i < list_count(mem_system->mod_list); i++)
+	{
+		mod = list_get(mem_system->mod_list, i);
         if (mod->kind == mod_kind_cache && mod->level == 2) break;
     }
-    fprintf(f, "PUU Write Count: %d", mem_system->puu->write_count);
+    fprintf(f, "PUU Write Count: %d\n", mem_system->puu->write_count);
     fprintf(f, "L2 Block Size: %d\n", mod->block_size);
     fprintf(f, "PUU Buffer1 Count: %d\n", mem_system->puu->buffer1->count);
     fprintf(f, "PUU Buffer2 Count: %d\n", mem_system->puu->buffer2->count);
@@ -371,7 +372,7 @@ void mem_system_dump_report(void)
             linked_list_head(mem_system->puu->buffer1);
             LINKED_LIST_FOR_EACH(mem_system->puu->buffer2)
             {
-                linked_list_insert(buffer1, linked_list_get(buffer2));
+                linked_list_insert(mem_system->puu->buffer1, linked_list_get(mem_system->puu->buffer2));
             }
             puu_buffer = mem_system->puu->buffer1;
         }
@@ -387,6 +388,7 @@ void mem_system_dump_report(void)
             *((int *)(puu_buffer->current->data)) >>= mod->log_block_size;
         }
         linked_list_sort(puu_buffer, puu_buffer_entry_comp);
+        /* Eliminate duplicate entries */
         LINKED_LIST_FOR_EACH(puu_buffer)
         {
             addr1 = *((int *)(puu_buffer->current->data));
@@ -395,15 +397,22 @@ void mem_system_dump_report(void)
             {
                 linked_list_next_circular(puu_buffer);
                 linked_list_remove(puu_buffer); /* Current element is next */
-                addr2 = *((int *)(puu_buffer->current->data));
+                if (puu_buffer->current_index == puu_buffer->count)
+                {
+                    addr2 = addr1 + 1; /* whatever, addr2 != addr1 is fine */
+                }
+                else
+                {
+                    addr2 = *((int *)(puu_buffer->current->data));
+                }
+                /* Restore current element pointer */
+                linked_list_prev_circular(puu_buffer);
             }
-            /* Restore current element pointer */
-            linked_list_prev_circular(puu_buffer);
         }
         puu_equiv_blocks = puu_buffer->count;
     }
 
-    fprintf(f, "Equivalent L2 Dirty Blocks: %d\n", puu_equiv_blocks);
+    fprintf(f, "Equivalent L2 Dirty Blocks: %d\n\n\n", puu_equiv_blocks);
     mod = NULL;
 
 	/* Intro */
