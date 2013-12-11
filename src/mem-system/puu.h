@@ -37,5 +37,5 @@ void puu_buffer_append_check(struct puu_t *puu, unsigned int addr);
 void puu_buffer_del_head(struct puu_t *puu);
 
 struct mod_t *puu_find_memory_mod(struct puu_t *puu, struct mod_t *top_mod);
-int puu_buffer_entry_comp(int *addr1, int *addr2);
+int puu_buffer_entry_comp(void *addr1, void *addr2);
 #endif // MEM_SYSTEM_PUU_H

@@ -220,7 +220,13 @@ struct mod_t *puu_find_memory_mod(struct puu_t *puu, struct mod_t *top_mod)
     return memory_mod;
 }
 
-int puu_buffer_entry_comp(int *addr1, int *addr2)
+int puu_buffer_entry_comp(void *addr1, void *addr2)
 {
-    return (*addr1 - *addr2);
+    int int1, int2;
+
+    int1 = *(int *)addr1;
+    int2 = *(int *)addr2;
+    if (int1 > int2) return 1;
+    if (int1 < int2) return -1;
+    return 0;
 }
